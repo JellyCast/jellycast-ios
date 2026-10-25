@@ -8,6 +8,7 @@ Finished: sign-in and the library cache, Home, Library with search, series page,
 
 Not checked on a device yet:
 
+- The Mac as "Designed for iPad" (2026-10-25): builds with `-destination 'platform=macOS,arch=arm64,variant=Designed for iPad'`, installed by hand in `/Applications/JellyCast.app` (`Wrapper/JellyCast.app` plus a `WrappedBundle` symlink) and it launches. Same 7-day profile as the iPhone. Playback, downloads and remote play on the Mac are not checked.
 - The iPad layout on the user's iPad (the install was refused while Developer Mode was off).
 - "Continue on iPhone" from the now playing screen of a TV.
 - AirPlay on direct play and on a transcode.

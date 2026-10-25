@@ -21,7 +21,7 @@ Target devices: the user's iPhone 18 Pro Max (iOS 27) and iPad. Personal use onl
 
 ## Stack
 
-- Swift 6, SwiftUI, iOS 26 minimum, iPhone and iPad (`TARGETED_DEVICE_FAMILY = 1,2`). No Mac Catalyst, no visionOS.
+- Swift 6, SwiftUI, iOS 26 minimum, iPhone and iPad (`TARGETED_DEVICE_FAMILY = 1,2`). Also runs on the user's Apple Silicon Mac as "Designed for iPad" (`SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES`). No Mac Catalyst, no visionOS.
 - Default actor isolation is `MainActor`; mark background work explicitly (`nonisolated`, `@concurrent`).
 - The Xcode project uses folder-synchronized groups: a new file in `JellyCast/` is part of the target automatically, no `project.pbxproj` edit needed. Only `JellyCast/Info.plist` is excluded (it is the target's Info.plist, merged with the generated keys).
 - One third-party dependency: AetherEngine (playback, pinned; see `NOTES.md`). Add another only when it clearly adds something and record why in `NOTES.md`.
