@@ -1,0 +1,246 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "Action": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actie"
+          }
+        }
+      }
+    },
+    "Adventure": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avontuur"
+          }
+        }
+      }
+    },
+    "Animation": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animatie"
+          }
+        }
+      }
+    },
+    "Comedy": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Komedie"
+          }
+        }
+      }
+    },
+    "Crime": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Misdaad"
+          }
+        }
+      }
+    },
+    "Documentary": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Documentaire"
+          }
+        }
+      }
+    },
+    "Drama": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drama"
+          }
+        }
+      }
+    },
+    "Family": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Familie"
+          }
+        }
+      }
+    },
+    "Fantasy": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fantasy"
+          }
+        }
+      }
+    },
+    "History": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geschiedenis"
+          }
+        }
+      }
+    },
+    "Horror": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horror"
+          }
+        }
+      }
+    },
+    "Music": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muziek"
+          }
+        }
+      }
+    },
+    "Mystery": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mysterie"
+          }
+        }
+      }
+    },
+    "News": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nieuws"
+          }
+        }
+      }
+    },
+    "Politics": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Politiek"
+          }
+        }
+      }
+    },
+    "Reality": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reality"
+          }
+        }
+      }
+    },
+    "Romance": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Romantiek"
+          }
+        }
+      }
+    },
+    "Science Fiction": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sciencefiction"
+          }
+        }
+      }
+    },
+    "Soap": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soap"
+          }
+        }
+      }
+    },
+    "TV Movie": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tv-film"
+          }
+        }
+      }
+    },
+    "Talk": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Talkshow"
+          }
+        }
+      }
+    },
+    "Thriller": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thriller"
+          }
+        }
+      }
+    },
+    "War": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oorlog"
+          }
+        }
+      }
+    },
+    "Western": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Western"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

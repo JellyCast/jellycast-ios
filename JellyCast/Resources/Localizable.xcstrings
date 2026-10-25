@@ -1,0 +1,3612 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "Next episodes are on this device": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De volgende afleveringen staan op dit apparaat"
+          }
+        }
+      }
+    },
+    "Download next %lld": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download volgende %lld"
+          }
+        }
+      }
+    },
+    "Download %lld episodes": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Download %lld episode"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Download %lld episodes"
+                }
+              }
+            }
+          }
+        },
+        "nl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Download %lld aflevering"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Download %lld afleveringen"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Only %lld of %lld fit on this device.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Er passen er maar %1$lld van de %2$lld op dit apparaat."
+          }
+        }
+      }
+    },
+    "about %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ongeveer %@"
+          }
+        }
+      }
+    },
+    "Remove watched downloads": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gekeken downloads verwijderen"
+          }
+        }
+      }
+    },
+    "Keep series ahead": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Series bijhouden"
+          }
+        }
+      }
+    },
+    "Watched downloads go a day after you watched them. A series you downloaded with Download next keeps its next %lld episodes on this device: at home, the next one downloads once you watch one.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gekeken downloads verdwijnen een dag nadat je ze keek. Een serie die je met Download volgende hebt gedownload, houdt de volgende %lld afleveringen op dit apparaat: thuis wordt de volgende gedownload zodra je er een kijkt."
+          }
+        }
+      }
+    },
+    "Not downloaded": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niet gedownload"
+          }
+        }
+      }
+    },
+    "What you see is from your last visit; only your downloads play until the server answers.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wat je ziet komt van je vorige bezoek; tot de server antwoordt spelen alleen je downloads."
+          }
+        }
+      }
+    },
+    "This app opens until %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deze app opent tot %@"
+          }
+        }
+      }
+    },
+    "Reinstall it from the Mac before you travel, or your downloads won't open.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installeer hem opnieuw vanaf de Mac voor je op reis gaat, anders openen je downloads niet."
+          }
+        }
+      }
+    },
+    "%@ left": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nog %@"
+          }
+        }
+      }
+    },
+    "%@ · Jellyfin %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · Jellyfin %2$@"
+          }
+        }
+      }
+    },
+    "%@ · not responding": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · reageert niet"
+          }
+        }
+      }
+    },
+    "%@s": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jaren %@"
+          }
+        }
+      }
+    },
+    "%lld ep.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld afl."
+          }
+        }
+      }
+    },
+    "%lld h %lld min": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld u %lld min"
+          }
+        }
+      }
+    },
+    "%lld min": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld min"
+          }
+        }
+      }
+    },
+    "%lld seasons": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld season"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld seasons"
+                }
+              }
+            }
+          }
+        },
+        "nl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld seizoen"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld seizoenen"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "2 to 3 hours": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 tot 3 uur"
+          }
+        }
+      }
+    },
+    "Added this month": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deze maand toegevoegd"
+          }
+        }
+      }
+    },
+    "Added this week": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deze week toegevoegd"
+          }
+        }
+      }
+    },
+    "Address": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adres"
+          }
+        }
+      }
+    },
+    "All": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alles"
+          }
+        }
+      }
+    },
+    "Audio": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Audio"
+          }
+        }
+      }
+    },
+    "Audio and subtitles": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Audio en ondertitels"
+          }
+        }
+      }
+    },
+    "A–Z": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A–Z"
+          }
+        }
+      }
+    },
+    "Back 10 seconds": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "10 seconden terug"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuleren"
+          }
+        }
+      }
+    },
+    "Cast": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acteurs"
+          }
+        }
+      }
+    },
+    "Close": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sluiten"
+          }
+        }
+      }
+    },
+    "Connect": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verbinden"
+          }
+        }
+      }
+    },
+    "Continue": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verder"
+          }
+        }
+      }
+    },
+    "Continue %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verder %@"
+          }
+        }
+      }
+    },
+    "Continue watching": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verder kijken"
+          }
+        }
+      }
+    },
+    "Continue · %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verder · %@"
+          }
+        }
+      }
+    },
+    "Current": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Huidige"
+          }
+        }
+      }
+    },
+    "Developer": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ontwikkelaar"
+          }
+        }
+      }
+    },
+    "Done": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klaar"
+          }
+        }
+      }
+    },
+    "Earlier": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eerder"
+          }
+        }
+      }
+    },
+    "Episodes": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afleveringen"
+          }
+        }
+      }
+    },
+    "Exit full screen": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volledig scherm sluiten"
+          }
+        }
+      }
+    },
+    "Forward 10 seconds": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "10 seconden vooruit"
+          }
+        }
+      }
+    },
+    "From the same collection": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uit dezelfde reeks"
+          }
+        }
+      }
+    },
+    "Full screen": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volledig scherm"
+          }
+        }
+      }
+    },
+    "Home": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Home"
+          }
+        }
+      }
+    },
+    "In Jellyfin, open your profile, choose Quick Connect and enter this code.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open in Jellyfin je profiel, kies Quick Connect en vul deze code in."
+          }
+        }
+      }
+    },
+    "In progress": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bezig"
+          }
+        }
+      }
+    },
+    "Kind": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soort"
+          }
+        }
+      }
+    },
+    "Length": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lengte"
+          }
+        }
+      }
+    },
+    "Library": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bibliotheek"
+          }
+        }
+      }
+    },
+    "Looking for servers on your network…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoeken naar servers op je netwerk…"
+          }
+        }
+      }
+    },
+    "Mark as not watched": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markeren als niet gezien"
+          }
+        }
+      }
+    },
+    "Mark as watched": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markeren als gezien"
+          }
+        }
+      }
+    },
+    "Movie": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Film"
+          }
+        }
+      }
+    },
+    "Movies": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Films"
+          }
+        }
+      }
+    },
+    "Movies, series, people": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Films, series, mensen"
+          }
+        }
+      }
+    },
+    "New": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nieuw"
+          }
+        }
+      }
+    },
+    "New · %lld episodes this week": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "New · %lld episode this week"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "New · %lld episodes this week"
+                }
+              }
+            }
+          }
+        },
+        "nl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Nieuw · %lld aflevering deze week"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Nieuw · %lld afleveringen deze week"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Newest": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nieuwste"
+          }
+        }
+      }
+    },
+    "Next episode": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volgende aflevering"
+          }
+        }
+      }
+    },
+    "Next episode · %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volgende aflevering · %@"
+          }
+        }
+      }
+    },
+    "Next: %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volgende: %@"
+          }
+        }
+      }
+    },
+    "No Jellyfin server answers at this address.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Op dit adres antwoordt geen Jellyfin-server."
+          }
+        }
+      }
+    },
+    "No Jellyfin server found on your network. Enter its address yourself, or search again.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen Jellyfin-server gevonden op je netwerk. Vul het adres zelf in, of zoek opnieuw."
+          }
+        }
+      }
+    },
+    "No results for “%@”": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen resultaten voor ‘%@’"
+          }
+        }
+      }
+    },
+    "Not started": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nog niet begonnen"
+          }
+        }
+      }
+    },
+    "Not watched": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nog niet gezien"
+          }
+        }
+      }
+    },
+    "Nothing here": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hier staat niets"
+          }
+        }
+      }
+    },
+    "Off": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uit"
+          }
+        }
+      }
+    },
+    "Open": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Openen"
+          }
+        }
+      }
+    },
+    "Or enter the address": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Of vul het adres in"
+          }
+        }
+      }
+    },
+    "Over 3 hours": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langer dan 3 uur"
+          }
+        }
+      }
+    },
+    "People": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mensen"
+          }
+        }
+      }
+    },
+    "Picture in Picture": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beeld-in-beeld"
+          }
+        }
+      }
+    },
+    "Play": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afspelen"
+          }
+        }
+      }
+    },
+    "Play or pause": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afspelen of pauzeren"
+          }
+        }
+      }
+    },
+    "Play · %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afspelen · %@"
+          }
+        }
+      }
+    },
+    "Playing now": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speelt nu"
+          }
+        }
+      }
+    },
+    "Position": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Positie"
+          }
+        }
+      }
+    },
+    "Recent searches": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recent gezocht"
+          }
+        }
+      }
+    },
+    "Refresh library": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bibliotheek vernieuwen"
+          }
+        }
+      }
+    },
+    "Related": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verwant"
+          }
+        }
+      }
+    },
+    "Remove": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verwijderen"
+          }
+        }
+      }
+    },
+    "Search again": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opnieuw zoeken"
+          }
+        }
+      }
+    },
+    "Season %lld": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seizoen %lld"
+          }
+        }
+      }
+    },
+    "Series": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Series"
+          }
+        }
+      }
+    },
+    "Series · %lld new": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serie · %lld nieuw"
+          }
+        }
+      }
+    },
+    "Series · new season": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serie · nieuw seizoen"
+          }
+        }
+      }
+    },
+    "Server": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Server"
+          }
+        }
+      }
+    },
+    "Server address": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serveradres"
+          }
+        }
+      }
+    },
+    "Servers on your network": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servers op je netwerk"
+          }
+        }
+      }
+    },
+    "Settings": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instellingen"
+          }
+        }
+      }
+    },
+    "Sign in to %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inloggen bij %@"
+          }
+        }
+      }
+    },
+    "Sign out": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uitloggen"
+          }
+        }
+      }
+    },
+    "Signed in as": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ingelogd als"
+          }
+        }
+      }
+    },
+    "Skip intro": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intro overslaan"
+          }
+        }
+      }
+    },
+    "Skip preview": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voorproefje overslaan"
+          }
+        }
+      }
+    },
+    "Skip recap": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Samenvatting overslaan"
+          }
+        }
+      }
+    },
+    "Sort": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sorteren"
+          }
+        }
+      }
+    },
+    "Special": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Special"
+          }
+        }
+      }
+    },
+    "Specials": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Specials"
+          }
+        }
+      }
+    },
+    "Start now": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nu starten"
+          }
+        }
+      }
+    },
+    "Start something new": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iets nieuws beginnen"
+          }
+        }
+      }
+    },
+    "Starts in %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start over %@"
+          }
+        }
+      }
+    },
+    "Subtitles": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ondertitels"
+          }
+        }
+      }
+    },
+    "The Wi-Fi now does %lld Mbit/s and this file peaks at %lld. Loading ahead first, then it plays without stalling.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De wifi haalt nu %lld Mbit/s, dit bestand vraagt pieken tot %lld. We laden eerst vooruit, daarna loopt het zonder haperen."
+          }
+        }
+      }
+    },
+    "The code has expired. Try again for a new one.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De code is verlopen. Probeer het opnieuw voor een nieuwe code."
+          }
+        }
+      }
+    },
+    "The player could not start.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De speler kon niet starten."
+          }
+        }
+      }
+    },
+    "The server answered with status %lld.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De server antwoordde met status %lld."
+          }
+        }
+      }
+    },
+    "The server can't be reached right now.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De server is nu niet bereikbaar."
+          }
+        }
+      }
+    },
+    "The server no longer accepts this sign-in.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De server accepteert deze inlog niet meer."
+          }
+        }
+      }
+    },
+    "This is not a valid address.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dit is geen geldig adres."
+          }
+        }
+      }
+    },
+    "This movie is no longer in the library.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deze film staat niet meer in de bibliotheek."
+          }
+        }
+      }
+    },
+    "This series is no longer in the library.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deze serie staat niet meer in de bibliotheek."
+          }
+        }
+      }
+    },
+    "Timings": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meettijden"
+          }
+        }
+      }
+    },
+    "Try again": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opnieuw proberen"
+          }
+        }
+      }
+    },
+    "Under 2 hours": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Korter dan 2 uur"
+          }
+        }
+      }
+    },
+    "Unknown year": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onbekend jaar"
+          }
+        }
+      }
+    },
+    "Up next": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volgende"
+          }
+        }
+      }
+    },
+    "Up to date": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Helemaal bij"
+          }
+        }
+      }
+    },
+    "Updated": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bijgewerkt"
+          }
+        }
+      }
+    },
+    "Watch again · %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opnieuw kijken · %@"
+          }
+        }
+      }
+    },
+    "Watched": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gezien"
+          }
+        }
+      }
+    },
+    "Year": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jaar"
+          }
+        }
+      }
+    },
+    "in progress and next episode": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bezig en volgende aflevering"
+          }
+        }
+      }
+    },
+    "last 30 days": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "laatste 30 dagen"
+          }
+        }
+      }
+    },
+    "series you haven't begun": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nog niet gekeken"
+          }
+        }
+      }
+    },
+    "type.series": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Series"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serie"
+          }
+        }
+      }
+    },
+    "Original": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Origineel"
+          }
+        }
+      }
+    },
+    "Auto": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auto"
+          }
+        }
+      }
+    },
+    "Auto, up to %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auto, tot %@"
+          }
+        }
+      }
+    },
+    "Auto · %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auto · %@"
+          }
+        }
+      }
+    },
+    "Lower quality · %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lagere kwaliteit · %@"
+          }
+        }
+      }
+    },
+    "Quality": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kwaliteit"
+          }
+        }
+      }
+    },
+    "Streaming quality": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Streamingkwaliteit"
+          }
+        }
+      }
+    },
+    "Wi-Fi": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wifi"
+          }
+        }
+      }
+    },
+    "Mobile data": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mobiele data"
+          }
+        }
+      }
+    },
+    "Now on": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nu op"
+          }
+        }
+      }
+    },
+    "Genre": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genre"
+          }
+        }
+      }
+    },
+    "All genres": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle genres"
+          }
+        }
+      }
+    },
+    "Play via the server · %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Via de server afspelen · %@"
+          }
+        }
+      }
+    },
+    "Playback stopped because of an error in the file or the connection.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het afspelen is gestopt door een fout in het bestand of de verbinding."
+          }
+        }
+      }
+    },
+    "Slow connection · %@ under the gear plays smoother": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trage verbinding · %@ onder het tandwiel speelt soepeler"
+          }
+        }
+      }
+    },
+    "The connection can't keep up with this file": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De verbinding kan dit bestand niet bijhouden"
+          }
+        }
+      }
+    },
+    "This file doesn't play on this iPhone.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dit bestand speelt niet af op deze iPhone."
+          }
+        }
+      }
+    },
+    "This item doesn't play": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dit item speelt niet af"
+          }
+        }
+      }
+    },
+    "This item has no file the server can play.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dit item heeft geen bestand dat de server kan afspelen."
+          }
+        }
+      }
+    },
+    "Waiting for the connection": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wachten op de verbinding"
+          }
+        }
+      }
+    },
+    "You're offline.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je bent offline."
+          }
+        }
+      }
+    },
+    "· %@ buffered": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "· %@ gebufferd"
+          }
+        }
+      }
+    },
+    "Updated %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bijgewerkt %@"
+          }
+        }
+      }
+    },
+    "Local network is when the server is on the same network as this iPhone. Auto measures the connection when playback starts and picks the highest quality that keeps up. Below Original the server converts the video, in SDR.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lokaal netwerk is wanneer de server op hetzelfde netwerk zit als deze iPhone. Auto meet de verbinding bij het starten en kiest de hoogste kwaliteit die bijblijft. Onder Origineel zet de server de video om, in SDR."
+          }
+        }
+      }
+    },
+    "Local network": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lokaal netwerk"
+          }
+        }
+      }
+    },
+    "%@ Mbit/s": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Mbit/s"
+          }
+        }
+      }
+    },
+    "Measured %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gemeten %@"
+          }
+        }
+      }
+    },
+    "Connection": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verbinding"
+          }
+        }
+      }
+    },
+    "Playing on %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speelt op %@"
+          }
+        }
+      }
+    },
+    "Paused on %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gepauzeerd op %@"
+          }
+        }
+      }
+    },
+    "Stopped on %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gestopt op %@"
+          }
+        }
+      }
+    },
+    "Direct play": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Direct play"
+          }
+        }
+      }
+    },
+    "Direct stream": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Direct stream"
+          }
+        }
+      }
+    },
+    "Transcode": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transcode"
+          }
+        }
+      }
+    },
+    "Shows what plays on %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toont wat er op %@ speelt"
+          }
+        }
+      }
+    },
+    "The TV didn't get that": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De tv heeft dat niet ontvangen"
+          }
+        }
+      }
+    },
+    "Stop on the TV": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stoppen op de tv"
+          }
+        }
+      }
+    },
+    "Pause": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pauzeren"
+          }
+        }
+      }
+    },
+    "paused": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gepauzeerd"
+          }
+        }
+      }
+    },
+    "Play on…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afspelen op…"
+          }
+        }
+      }
+    },
+    "Play %@ on": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ afspelen op"
+          }
+        }
+      }
+    },
+    "This iPhone": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deze iPhone"
+          }
+        }
+      }
+    },
+    "Is your TV missing? Open JellyCast on that TV.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Staat je tv er niet bij? Open JellyCast op die tv."
+          }
+        }
+      }
+    },
+    "Rename": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naam wijzigen"
+          }
+        }
+      }
+    },
+    "Name": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naam"
+          }
+        }
+      }
+    },
+    "Save": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opslaan"
+          }
+        }
+      }
+    },
+    "The name is only used on this iPhone.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De naam geldt alleen op deze iPhone."
+          }
+        }
+      }
+    },
+    "Continues from %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gaat verder vanaf %@"
+          }
+        }
+      }
+    },
+    "Playing something else now": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speelt nu iets anders"
+          }
+        }
+      }
+    },
+    "JellyCast is open": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "JellyCast staat open"
+          }
+        }
+      }
+    },
+    "Pair Chromecast": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chromecast koppelen"
+          }
+        }
+      }
+    },
+    "Once. After that your iPhone turns the TV on and starts JellyCast, even when everything is in standby.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eenmalig. Daarna zet je iPhone de tv aan en start hij JellyCast, ook als alles in standby staat."
+          }
+        }
+      }
+    },
+    "The code appears on the TV in a moment": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De code verschijnt zo op de tv"
+          }
+        }
+      }
+    },
+    "Type the code that is on the TV now": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Typ de code die nu op de tv staat"
+          }
+        }
+      }
+    },
+    "Pair": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koppelen"
+          }
+        }
+      }
+    },
+    "The TV didn't answer. Is JellyCast open on it?": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De tv antwoordt niet. Staat JellyCast erop open?"
+          }
+        }
+      }
+    },
+    "That code doesn't match. Try again for a new one.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die code klopt niet. Probeer opnieuw voor een nieuwe."
+          }
+        }
+      }
+    },
+    "Pairing didn't work. Try again for a new code.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koppelen lukte niet. Probeer opnieuw voor een nieuwe code."
+          }
+        }
+      }
+    },
+    "Asleep · turns the TV on": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slaapt · zet de tv aan"
+          }
+        }
+      }
+    },
+    "No TV can be reached now. Open JellyCast on a TV to play there.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Er is nu geen tv bereikbaar. Open JellyCast op een tv om daar af te spelen."
+          }
+        }
+      }
+    },
+    "Turning on %@…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ wordt aangezet…"
+          }
+        }
+      }
+    },
+    "Your Chromecast can only be reached from your home network.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je Chromecast is alleen vanaf je thuisnetwerk bereikbaar."
+          }
+        }
+      }
+    },
+    "Continue %@ on": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ verder op"
+          }
+        }
+      }
+    },
+    "Continue on…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verder op…"
+          }
+        }
+      }
+    },
+    "Forget pairing": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koppeling vergeten"
+          }
+        }
+      }
+    },
+    "Downloads": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloads"
+          }
+        }
+      }
+    },
+    "Search": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoeken"
+          }
+        }
+      }
+    },
+    "Movies and episodes to watch offline will be here.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hier komen films en afleveringen om offline te kijken."
+          }
+        }
+      }
+    },
+    "%lld years": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld jaar"
+          }
+        }
+      }
+    },
+    "AI chat": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI-chat"
+          }
+        }
+      }
+    },
+    "API key": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API-sleutel"
+          }
+        }
+      }
+    },
+    "All %lld actors": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle %lld acteurs"
+          }
+        }
+      }
+    },
+    "All %lld actors and %lld guest stars": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle %1$lld acteurs en %2$lld gastrollen"
+          }
+        }
+      }
+    },
+    "Answers by %@, with the series or movie info from your server. Can be wrong.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antwoorden van %@, met de info over de serie of film van je server. Kan fout zijn."
+          }
+        }
+      }
+    },
+    "Ask something about %@…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vraag iets over %@…"
+          }
+        }
+      }
+    },
+    "Change": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wijzig"
+          }
+        }
+      }
+    },
+    "Chat": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chat"
+          }
+        }
+      }
+    },
+    "Directed by": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regie"
+          }
+        }
+      }
+    },
+    "Directed by · this episode": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regie · deze aflevering"
+          }
+        }
+      }
+    },
+    "Guest stars": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gastrollen"
+          }
+        }
+      }
+    },
+    "Is this based on real events?": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Is dit echt gebeurd?"
+          }
+        }
+      }
+    },
+    "Makers": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Makers"
+          }
+        }
+      }
+    },
+    "New conversation": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nieuw gesprek"
+          }
+        }
+      }
+    },
+    "No spoilers": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen spoilers"
+          }
+        }
+      }
+    },
+    "No spoilers after %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen spoilers na %@"
+          }
+        }
+      }
+    },
+    "Nothing related in the library.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niets verwants in de bibliotheek."
+          }
+        }
+      }
+    },
+    "Produced by": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Productie"
+          }
+        }
+      }
+    },
+    "Produced by · series": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Productie · serie"
+          }
+        }
+      }
+    },
+    "Remove key": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sleutel verwijderen"
+          }
+        }
+      }
+    },
+    "Save key": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sleutel bewaren"
+          }
+        }
+      }
+    },
+    "Send": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verstuur"
+          }
+        }
+      }
+    },
+    "Service": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dienst"
+          }
+        }
+      }
+    },
+    "Spoilers allowed": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spoilers toegestaan"
+          }
+        }
+      }
+    },
+    "Test key": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sleutel testen"
+          }
+        }
+      }
+    },
+    "The API key isn't accepted. Check it under Settings → AI chat.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De API-sleutel wordt niet geaccepteerd. Controleer hem bij Instellingen → AI-chat."
+          }
+        }
+      }
+    },
+    "The answer was empty. Try again.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het antwoord was leeg. Probeer het opnieuw."
+          }
+        }
+      }
+    },
+    "The cast couldn't be loaded.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De cast kon niet worden geladen."
+          }
+        }
+      }
+    },
+    "The key is stored in the Keychain on this device only. Without a key there is no Chat tab.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De sleutel staat alleen op dit apparaat, in de sleutelhanger. Zonder sleutel is er geen Chat-tab."
+          }
+        }
+      }
+    },
+    "The model is told what you have watched so far and instructed not to reveal anything after it.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het model krijgt te horen wat je tot nu toe hebt gezien en de opdracht niets daarna te verklappen."
+          }
+        }
+      }
+    },
+    "The model won't answer this question.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het model wil deze vraag niet beantwoorden."
+          }
+        }
+      }
+    },
+    "The service didn't answer (%lld). Try again.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De dienst gaf geen antwoord (%lld). Probeer het opnieuw."
+          }
+        }
+      }
+    },
+    "Too many questions at once. Try again in a moment.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te veel vragen tegelijk. Probeer het zo opnieuw."
+          }
+        }
+      }
+    },
+    "What happened in the previous episode?": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wat gebeurde er vorige aflevering?"
+          }
+        }
+      }
+    },
+    "What should I know before watching?": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wat moet ik weten voor ik ga kijken?"
+          }
+        }
+      }
+    },
+    "Who is who?": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wie is wie?"
+          }
+        }
+      }
+    },
+    "Written by": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scenario"
+          }
+        }
+      }
+    },
+    "Written by · this episode": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scenario · deze aflevering"
+          }
+        }
+      }
+    },
+    "as %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "als %@"
+          }
+        }
+      }
+    },
+    "Not accepted": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niet geaccepteerd"
+          }
+        }
+      }
+    },
+    "Search the web": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoeken op internet"
+          }
+        }
+      }
+    },
+    "The model can look things up, such as real events behind the story or news about the cast, and shows its sources. Searches cost a little extra on your API account.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het model kan dingen opzoeken, zoals echte gebeurtenissen achter het verhaal of nieuws over de cast, en laat de bronnen zien. Zoeken kost iets extra op je API-account."
+          }
+        }
+      }
+    },
+    "Thinking…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aan het nadenken…"
+          }
+        }
+      }
+    },
+    "Searched the web %lld times": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld keer op internet gezocht"
+          }
+        }
+      }
+    },
+    "Searching “%@”": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoeken naar “%@”"
+          }
+        }
+      }
+    },
+    "%@ and %lld more": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ en nog %2$lld"
+          }
+        }
+      }
+    },
+    "%lld results · %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld resultaten · %2$@"
+          }
+        }
+      }
+    },
+    "Searched the web once": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eén keer op internet gezocht"
+          }
+        }
+      }
+    },
+    "Picking out what matters": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De relevante informatie eruit halen"
+          }
+        }
+      }
+    },
+    "Reading %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ lezen"
+          }
+        }
+      }
+    },
+    "Can't reach %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ is niet bereikbaar"
+          }
+        }
+      }
+    },
+    "Connect to another server": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Andere server verbinden"
+          }
+        }
+      }
+    },
+    "What you see is from your last visit; nothing plays until the server answers.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wat je ziet komt van je vorige bezoek; afspelen lukt pas weer als de server antwoordt."
+          }
+        }
+      }
+    },
+    "Compact · 1080p": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compact · 1080p"
+          }
+        }
+      }
+    },
+    "Waiting in line": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In de wachtrij"
+          }
+        }
+      }
+    },
+    "Converting on the server": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omzetten op de server"
+          }
+        }
+      }
+    },
+    "Downloading": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloaden"
+          }
+        }
+      }
+    },
+    "Waiting for the network": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wacht op het netwerk"
+          }
+        }
+      }
+    },
+    "Paused": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gepauzeerd"
+          }
+        }
+      }
+    },
+    "Didn't finish: %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niet gelukt: %@"
+          }
+        }
+      }
+    },
+    "On this %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Op deze %@"
+          }
+        }
+      }
+    },
+    "about %lld min left": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nog ± %lld min"
+          }
+        }
+      }
+    },
+    "Download options…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloadopties…"
+          }
+        }
+      }
+    },
+    "Remove download": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verwijder download"
+          }
+        }
+      }
+    },
+    "Go on": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ga verder"
+          }
+        }
+      }
+    },
+    "Cancel download": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuleer download"
+          }
+        }
+      }
+    },
+    "Downloading only works at home, where the server is.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloaden kan alleen thuis, waar de server staat."
+          }
+        }
+      }
+    },
+    "This doesn't fit: %@ more is needed.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dit past niet: er is nog %@ nodig."
+          }
+        }
+      }
+    },
+    "Download": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download"
+          }
+        }
+      }
+    },
+    "Download %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ downloaden"
+          }
+        }
+      }
+    },
+    "Free on this %@: %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vrij op deze %1$@: %2$@"
+          }
+        }
+      }
+    },
+    "Compact": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compact"
+          }
+        }
+      }
+    },
+    "Doesn't fit · %@ more needed": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Past niet · nog %@ nodig"
+          }
+        }
+      }
+    },
+    "1080p, standard colours (SDR), one audio track in stereo. The server converts it: ready in about %lld min.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1080p, gewone kleuren (SDR), één audiotrack in stereo. De server zet hem om: klaar over ± %lld min."
+          }
+        }
+      }
+    },
+    "%@, every audio and subtitle track.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, alle audio- en ondertitelsporen."
+          }
+        }
+      }
+    },
+    "About %lld min to download.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "± %lld min downloaden."
+          }
+        }
+      }
+    },
+    "Pause all": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pauzeer alles"
+          }
+        }
+      }
+    },
+    "No downloads yet": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nog geen downloads"
+          }
+        }
+      }
+    },
+    "At home, download a movie or episode with the arrow button to watch it anywhere.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download thuis een film of aflevering met de pijlknop om hem overal te kijken."
+          }
+        }
+      }
+    },
+    "JellyCast %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "JellyCast %@"
+          }
+        }
+      }
+    },
+    "Other %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Overig %@"
+          }
+        }
+      }
+    },
+    "Free %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vrij %@"
+          }
+        }
+      }
+    },
+    "%@ of %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ van %2$@"
+          }
+        }
+      }
+    },
+    "watched": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gezien"
+          }
+        }
+      }
+    },
+    "not watched": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nog niet gezien"
+          }
+        }
+      }
+    },
+    "All watched": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alles gezien"
+          }
+        }
+      }
+    },
+    "Series page": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seriepagina"
+          }
+        }
+      }
+    },
+    "Shows the downloads": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toont de downloads"
+          }
+        }
+      }
+    },
+    "%lld movies": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld movie"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld movies"
+                }
+              }
+            }
+          }
+        },
+        "nl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld film"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld films"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld episodes": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld episode"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld episodes"
+                }
+              }
+            }
+          }
+        },
+        "nl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld aflevering"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld afleveringen"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld not watched": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld not watched"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld not watched"
+                }
+              }
+            }
+          }
+        },
+        "nl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld niet gezien"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld niet gezien"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Play from the beginning": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vanaf het begin afspelen"
+          }
+        }
+      }
+    },
+    "Download…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloaden…"
+          }
+        }
+      }
+    },
+    "Go to series": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naar serie"
+          }
+        }
+      }
+    },
+    "Play %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ afspelen"
+          }
+        }
+      }
+    },
+    "Video": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Video"
+          }
+        }
+      }
+    },
+    "%lld s": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld s"
+          }
+        }
+      }
+    },
+    "Filter and sort": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filteren en sorteren"
+          }
+        }
+      }
+    },
+    "Status": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status"
+          }
+        }
+      }
+    },
+    "Everything": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alles"
+          }
+        }
+      }
+    },
+    "Clear": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wissen"
+          }
+        }
+      }
+    },
+    "Go to movie": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naar film"
+          }
+        }
+      }
+    },
+    "More": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meer"
+          }
+        }
+      }
+    },
+    "Forced": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geforceerd"
+          }
+        }
+      }
+    },
+    "Image": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beeld"
+          }
+        }
+      }
+    },
+    "Track %lld": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spoor %lld"
+          }
+        }
+      }
+    },
+    "Add to list": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aan lijst toevoegen"
+          }
+        }
+      }
+    },
+    "%@ goes at the bottom": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ komt onderaan de lijst"
+          }
+        }
+      }
+    },
+    "New list…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nieuwe lijst…"
+          }
+        }
+      }
+    },
+    "already in it, as %lld": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "staat er al in, als %lld"
+          }
+        }
+      }
+    },
+    "already in it": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "staat er al in"
+          }
+        }
+      }
+    },
+    "Rename list": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lijst hernoemen"
+          }
+        }
+      }
+    },
+    "Delete this list?": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deze lijst verwijderen?"
+          }
+        }
+      }
+    },
+    "This list is gone": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deze lijst bestaat niet meer"
+          }
+        }
+      }
+    },
+    "Delete list": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lijst verwijderen"
+          }
+        }
+      }
+    },
+    "The movies and episodes stay in the library.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De films en afleveringen blijven in de bibliotheek."
+          }
+        }
+      }
+    },
+    "%@ to go": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nog %@"
+          }
+        }
+      }
+    },
+    "Continue: %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verder: %@"
+          }
+        }
+      }
+    },
+    "Lists": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lijsten"
+          }
+        }
+      }
+    },
+    "New list": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nieuwe lijst"
+          }
+        }
+      }
+    },
+    "Create": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maken"
+          }
+        }
+      }
+    },
+    "Movies and episodes in your own order": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Films en afleveringen in je eigen volgorde"
+          }
+        }
+      }
+    },
+    "No lists yet": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nog geen lijsten"
+          }
+        }
+      }
+    },
+    "%lld titles": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld title"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld titles"
+                }
+              }
+            }
+          }
+        },
+        "nl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld titel"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld titels"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld watched": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld gezien"
+          }
+        }
+      }
+    },
+    "Empty": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leeg"
+          }
+        }
+      }
+    },
+    "Continue with %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verder met %@"
+          }
+        }
+      }
+    },
+    "The list wasn't changed": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De lijst is niet aangepast"
+          }
+        }
+      }
+    },
+    "Add to list…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aan lijst toevoegen…"
+          }
+        }
+      }
+    },
+    "Next · %@ %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volgende · %1$@ %2$@"
+          }
+        }
+      }
+    },
+    "Next · %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volgende · %@"
+          }
+        }
+      }
+    },
+    "Add season to list…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seizoen aan lijst toevoegen…"
+          }
+        }
+      }
+    },
+    "Hold a movie, series or episode and choose Add to list…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Houd een film, serie of aflevering vast en kies Aan lijst toevoegen…"
+          }
+        }
+      }
+    },
+    "Make one with + above, or hold a movie, series or episode and choose Add to list…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maak er een met + hierboven, of houd een film, serie of aflevering vast en kies Aan lijst toevoegen…"
+          }
+        }
+      }
+    },
+    "Open on %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Openen op %@"
+          }
+        }
+      }
+    },
+    "Ratings": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beoordelingen"
+          }
+        }
+      }
+    },
+    "Rating and links": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beoordeling en links"
+          }
+        }
+      }
+    },
+    "The IMDb rating of movies and series, with links to IMDb. Descriptions come from IMDb.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De IMDb-beoordeling van films en series, met links naar IMDb. Beschrijvingen komen van IMDb."
+          }
+        }
+      }
+    },
+    "The Rotten Tomatoes critics' score, which the server has for movies only. Links search Rotten Tomatoes. Descriptions come from IMDb.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De score van critici op Rotten Tomatoes. De server heeft die alleen voor films. Links zoeken op Rotten Tomatoes. Beschrijvingen komen van IMDb."
+          }
+        }
+      }
+    },
+    "Links to TMDB. The server keeps a TMDB rating for episodes only. Descriptions come from IMDb.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Links naar TMDB. De server bewaart alleen voor afleveringen een TMDB-beoordeling. Beschrijvingen komen van IMDb."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
