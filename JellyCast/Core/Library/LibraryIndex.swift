@@ -157,14 +157,16 @@ nonisolated struct LibraryIndex: Sendable {
             .map(\.0)
     }
 
+    /// Watched movies and fully watched series are left out, as on the TV apps.
     func newEntries(now: Date = .now) -> [NewEntry] {
         guard let cutoff = Calendar.current.date(byAdding: .day, value: -Self.newWindowDays, to: now) else {
             return []
         }
         let movies = snapshot.movies
-            .filter { ($0.dateAdded ?? .distantPast) >= cutoff }
+            .filter { !$0.watch.played && ($0.dateAdded ?? .distantPast) >= cutoff }
             .map { (NewEntry.movie($0), $0.dateAdded ?? .distantPast) }
         let series = progressBySeries.compactMap { seriesID, progress -> (NewEntry, Date)? in
+            guard progress.status != .watched else { return nil }
             let added = progress.episodes.filter { ($0.dateAdded ?? .distantPast) >= cutoff }
             guard let series = seriesByID[seriesID], let latest = added.compactMap(\.dateAdded).max() else {
                 return nil
