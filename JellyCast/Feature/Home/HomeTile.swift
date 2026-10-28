@@ -69,7 +69,8 @@ struct HomeTile: View {
 
     private func open() {
         switch item {
-        case .continueWatching(let playable): navigation.play(playable)
+        case .continueWatching(.movie(let movie)): navigation.open(.movie(id: movie.id))
+        case .continueWatching(.episode(let episode)): navigation.open(.series(id: episode.seriesID))
         case .newMovie(let movie), .notStartedMovie(let movie): navigation.open(.movie(id: movie.id))
         case .newEpisodes(let series, _, _, _), .notStartedSeries(let series):
             navigation.open(.series(id: series.id))
