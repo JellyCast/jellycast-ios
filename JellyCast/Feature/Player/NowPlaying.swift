@@ -16,8 +16,10 @@ final class NowPlaying {
     let pip = PictureInPicture()
     let system = SystemNowPlaying()
     private var detachedPlayer: (layer: AVPlayerLayer, player: AVPlayer)?
+    private var backgroundHandOff: Task<Void, Never>?
 
     private static let logger = Logger(subsystem: "nl.jellycast.ios", category: "player")
+    private static let pictureInPictureStartWait = Duration.seconds(1)
 
     func play(
         _ playable: Playable, store: LibraryStore, streams: StreamSelection? = nil, queue: PlayQueue? = nil
@@ -54,6 +56,7 @@ final class NowPlaying {
         guard let session else { return }
         self.session = nil
         isExpanded = false
+        backgroundHandOff?.cancel()
         detachedPlayer = nil
         system.clear()
         session.stop()
@@ -61,15 +64,28 @@ final class NowPlaying {
     }
 
     /// iOS pauses a player whose video is on screen when the app leaves. Without its layer the
-    /// native route plays on as sound; the software route drops its video by itself.
+    /// native route plays on as sound; the software route drops its video by itself. The layer
+    /// stays until PiP had its chance: the automatic start can come after the scene backgrounds,
+    /// and a window around a layer without a player never opens.
     func enteredBackground() {
-        guard !pip.isActive, let layer = session?.engine.nativePlayerLayer, let player = layer.player
-        else { return }
-        layer.player = nil
-        detachedPlayer = (layer, player)
+        guard let engine = session?.engine, !pip.isActive else { return }
+        let wasPlaying = engine.state == .playing
+        backgroundHandOff?.cancel()
+        backgroundHandOff = Task {
+            if pip.isPossible {
+                do { try await Task.sleep(for: Self.pictureInPictureStartWait) } catch { return }
+            }
+            guard !pip.isActive, let layer = engine.nativePlayerLayer, let player = layer.player else { return }
+            layer.player = nil
+            detachedPlayer = (layer, player)
+            if wasPlaying, engine.state != .playing { engine.play() }
+            Self.logger.info("In the background without PiP, playing on as sound")
+        }
     }
 
     func becameActive() {
+        backgroundHandOff?.cancel()
+        backgroundHandOff = nil
         pip.stopIfActive()
         if let detachedPlayer, detachedPlayer.layer.player == nil {
             detachedPlayer.layer.player = detachedPlayer.player
