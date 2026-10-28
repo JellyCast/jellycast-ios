@@ -81,6 +81,7 @@ struct MainView: View {
         ) {} message: {
             Text(lists.changeError ?? "")
         }
+        .remotePlaybackActivity(remote, client: store.session.client)
         .task { await store.start() }
         .task { await checkServerAtStart() }
         .task(id: store.index == nil) {

@@ -7,6 +7,7 @@ struct JellyCastApp: App {
     init() {
         _ = AppLaunch.startedAt
         DownloadStore.shared.attach()
+        RemotePlaybackActivity.install()
     }
 
     var body: some Scene {
@@ -70,6 +71,7 @@ final class AppModel {
     func signOut() {
         guard let session = library?.session else { return }
         library = nil
+        Task { await RemotePlaybackActivity.shared.endAll() }
         SessionStorage.delete()
         LibraryCache.delete()
         Task { await session.client.signOut() }

@@ -22,6 +22,10 @@ Server: Jellyfin 10.11 (see `server.md`).
 - `POST /Sessions/Capabilities/Full` with `PlayableMediaTypes: ["Video"]`, `SupportsMediaControl: true` and the supported commands.
 - Keep the WebSocket `/socket` open (answer `ForceKeepAlive` with `KeepAlive`, reconnect after network loss and when the app returns to the foreground) and handle the incoming `Playstate`, `GeneralCommand` and `Play` messages.
 
+## Live Activity (built 2026-10-28)
+
+While the app runs, what plays on the TV the TV bar shows is also a Live Activity on the lock screen and in the Dynamic Island (`Feature/LiveActivity`, the widget extension `JellyCastLiveActivity`). It follows every poll; its buttons (play/pause, ±10 s) send the same commands as the now playing screen. With no push server it can't be updated while the app is suspended: the progress runs on by itself and after the expected end the activity shows it is out of date. Details in `NOTES.md`.
+
 ## Waking the Chromecast (built)
 
 - **The Android TV Remote protocol (v2)** that the Google TV app and Home Assistant use: TLS on port 6467 for a one-time pairing (a code shown on the TV), then port 6466 for commands. The iPhone wakes the Chromecast (the TV follows through HDMI-CEC) and opens a JellyCast link (`jellycast://play?item=…&start=…&audio=…&subtitle=…`) that the Android TV app handles by opening the player. Then the server route above takes over.
@@ -67,7 +71,7 @@ Today names and pairings live on each iPhone or iPad: every device pairs a Chrom
 
 ## Open questions
 
-1. How the TV bar shares the space with the download accessory, and later a Live Activity on the lock screen?
+1. How the TV bar shares the space with the download accessory? (The Live Activity is built, see above.)
 2. Two sessions at once (both TVs): list, or the most recent one first?
 3. ~~Should the now playing screen open by itself when the app starts while something plays?~~ Yes, once per open (cold launch or back to the foreground), on the first answer within 5 s, and never while the app is in use; otherwise the TV bar. Details in `NOTES.md` (2026-10-28).
 4. After "Play on…": does the iPhone automatically follow that device?

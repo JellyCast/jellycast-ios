@@ -24,6 +24,7 @@ Target devices: the user's iPhone 18 Pro Max (iOS 27) and iPad. Personal use onl
 - Swift 6, SwiftUI, iOS 26 minimum, iPhone and iPad (`TARGETED_DEVICE_FAMILY = 1,2`). Also runs on the user's Apple Silicon Mac as "Designed for iPad" (`SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES`). No Mac Catalyst, no visionOS.
 - Default actor isolation is `MainActor`; mark background work explicitly (`nonisolated`, `@concurrent`).
 - The Xcode project uses folder-synchronized groups: a new file in `JellyCast/` is part of the target automatically, no `project.pbxproj` edit needed. Only `JellyCast/Info.plist` is excluded (it is the target's Info.plist, merged with the generated keys).
+- Second target `JellyCastLiveActivity` (widget extension for the TV Live Activity, folder `JellyCastLiveActivity/`). Files from `JellyCast/` it needs are added to it in `project.pbxproj` (exception set "JellyCast folder in JellyCastLiveActivity target"). Both targets share the App Group `group.nl.jellycast.ios`.
 - One third-party dependency: AetherEngine (playback, pinned; see `NOTES.md`). Add another only when it clearly adds something and record why in `NOTES.md`.
 
 ## Project layout

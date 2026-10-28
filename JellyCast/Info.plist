@@ -13,6 +13,8 @@
 	</dict>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>JellyCast looks for Jellyfin servers on your network and plays from them.</string>
+	<key>NSSupportsLiveActivities</key>
+	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

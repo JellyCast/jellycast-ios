@@ -3776,6 +3776,46 @@
           }
         }
       }
+    },
+    "Open JellyCast to update": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open JellyCast om bij te werken"
+          }
+        }
+      }
+    },
+    "Play or pause on the TV": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afspelen of pauzeren op de tv"
+          }
+        }
+      }
+    },
+    "Back 10 seconds on the TV": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "10 seconden terug op de tv"
+          }
+        }
+      }
+    },
+    "Forward 10 seconds on the TV": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "10 seconden vooruit op de tv"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

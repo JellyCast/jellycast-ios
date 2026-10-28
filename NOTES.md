@@ -35,6 +35,17 @@ The user checks battery use over a full film, PiP and AirPlay on the iPhone.
 
 ## Decisions
 
+### Live Activity for a TV (2026-10-28)
+
+- While the app runs and the TV bar shows a TV, that playback is a Live Activity: lock screen (image, series or movie, "S1 · E8 · title", "Playing on chromecast", a progress bar and remaining time that run by themselves, play/pause and ±10 s) and the Dynamic Island (compact: the brand mark and a progress ring; minimal: the ring; expanded: image, title, episode line, progress, play/pause). One activity, for the TV the TV bar shows; another TV ends it and starts a new one. It ends when the session is gone after an answer, on sign out and when Live Activities are off in Settings.
+- New target `JellyCastLiveActivity` (widget extension, `nl.jellycast.ios.LiveActivity`, embedded in the app). Its own folder `JellyCastLiveActivity/`; `RemotePlaybackAttributes.swift`, `RemotePlaybackIntents.swift`, `BrandMark.swift`, `JellyCastColors.swift` and `Localizable.xcstrings` from `JellyCast/` are members of both targets (membership exception set in `project.pbxproj`).
+- **App Group `group.nl.jellycast.ios` works with the free personal team** (provisioned with `-allowProvisioningUpdates`, both targets). The app writes the item's image (216 px wide JPEG) to the group container and the activity reads it; without the container it would show the brand mark.
+- No push server, so the app can only update the activity while it runs (every 5 s poll, and straight away after a command). In between the progress runs on from the last answer with `ProgressView(timerInterval:)`/`Text(timerInterval:)`. The stale date is the expected end of the item plus a minute (a pause: 30 min after the last answer); stale, the activity shows "Open JellyCast to update", a static bar and no buttons.
+- The buttons are `LiveActivityIntent`s; they run in the app (also when the system has to launch it), update the activity at once and send the command through `RemoteSessions.send`, or straight to the server with the stored session when the app wasn't running.
+- On the lock screen with the iPhone locked or in always-on, iOS shows the remaining time as "45:--": seconds are hidden in that state by the system.
+- Checked: the simulator (lock screen with the real Chromecast session and its image, compact Dynamic Island) and the iPhone 18 Pro Max (lock screen with The Last of Us on the Chromecast). Not checked: the expanded Dynamic Island (a long press in the simulator opened the app), the buttons (not pressed, the TV was in use), going stale, the next episode updating it, a background launch by a button, the iPad (installed, no Live Activities on iPad).
+- DEBUG launch argument `-liveActivityPreview` starts the activity with sample data and stops real updates, for screenshots.
+
 ### Swipe down in full screen leaves full screen (2026-10-28)
 
 In full screen (iPhone landscape, iPad video only) a swipe down returns to the regular player, the same as the full-screen button: the iPhone turns back to portrait, the iPad shows the info panel again. The video springs back instead of sliding away. From the regular player a swipe down still minimizes to the mini player.
