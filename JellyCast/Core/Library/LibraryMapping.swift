@@ -66,6 +66,7 @@ nonisolated extension Episode {
             still: item.ownImage("Primary"),
             seriesPoster: item.SeriesPrimaryImageTag.map { ImageRef(itemID: seriesID, tag: $0) },
             seriesBackdrop: item.parentBackdrop,
+            seasonThumb: item.seasonThumb,
             imdbID: item.ProviderIds?["Imdb"],
             communityRating: item.CommunityRating,
             watch: WatchState(item.UserData)
@@ -91,6 +92,14 @@ private nonisolated extension JellyfinItem {
 
     var ownBackdrop: ImageRef? {
         BackdropImageTags?.first.map { ImageRef(itemID: Id, tag: $0) }
+    }
+
+    /// The parent thumb falls back to the series' own; only the season's counts here.
+    var seasonThumb: ImageRef? {
+        guard let itemID = ParentThumbItemId, itemID == SeasonId, let tag = ParentThumbImageTag else {
+            return nil
+        }
+        return ImageRef(itemID: itemID, tag: tag)
     }
 
     var parentBackdrop: ImageRef? {

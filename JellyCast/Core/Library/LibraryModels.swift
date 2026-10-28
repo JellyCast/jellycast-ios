@@ -70,6 +70,8 @@ nonisolated struct Episode: Codable, Sendable, Identifiable, Hashable {
     let still: ImageRef?
     let seriesPoster: ImageRef?
     let seriesBackdrop: ImageRef?
+    /// The season's own landscape thumb (Thumb image), when the server has one.
+    var seasonThumb: ImageRef? = nil
     var imdbID: String?
     var communityRating: Double?
     var watch: WatchState

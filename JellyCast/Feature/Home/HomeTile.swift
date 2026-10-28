@@ -259,24 +259,30 @@ extension HomeItem {
         return playable.progress
     }
 
-    var image: ImageRef? {
+    var image: ImageRef? { art.ref }
+
+    var imageType: JellyfinClient.ImageType { art.type }
+
+    /// The season's thumb when it has one, else the series' backdrop: never an episode still.
+    private var art: (ref: ImageRef?, type: JellyfinClient.ImageType) {
         switch self {
-        case .continueWatching(.episode(let episode)): episode.seriesBackdrop ?? episode.seriesPoster
+        case .continueWatching(.episode(let episode)):
+            Self.art(season: episode.seasonThumb, backdrop: episode.seriesBackdrop, poster: episode.seriesPoster)
         case .continueWatching(.movie(let movie)), .newMovie(let movie), .notStartedMovie(let movie):
-            movie.backdrop ?? movie.poster
-        case .newEpisodes(let series, _, _, _), .notStartedSeries(let series):
-            series.backdrop ?? series.poster
+            Self.art(season: nil, backdrop: movie.backdrop, poster: movie.poster)
+        case .newEpisodes(let series, let firstNew, _, _):
+            Self.art(season: firstNew?.seasonThumb, backdrop: series.backdrop, poster: series.poster)
+        case .notStartedSeries(let series):
+            Self.art(season: nil, backdrop: series.backdrop, poster: series.poster)
         }
     }
 
-    var imageType: JellyfinClient.ImageType {
-        switch self {
-        case .continueWatching(.episode(let episode)): episode.seriesBackdrop == nil ? .primary : .backdrop
-        case .continueWatching(.movie(let movie)), .newMovie(let movie), .notStartedMovie(let movie):
-            movie.backdrop == nil ? .primary : .backdrop
-        case .newEpisodes(let series, _, _, _), .notStartedSeries(let series):
-            series.backdrop == nil ? .primary : .backdrop
-        }
+    private static func art(
+        season: ImageRef?, backdrop: ImageRef?, poster: ImageRef?
+    ) -> (ref: ImageRef?, type: JellyfinClient.ImageType) {
+        if let season { return (season, .thumb) }
+        if let backdrop { return (backdrop, .backdrop) }
+        return (poster, .primary)
     }
 
     var target: MediaTarget {
