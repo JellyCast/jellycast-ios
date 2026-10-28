@@ -33,7 +33,7 @@ struct PlayerScreen: View {
                     if layout.isRegular, landscape, !isVideoOnly {
                         infoPanel(arrangement: .split) {
                             videoArea(fullscreen: false, insets: proxy.safeAreaInsets)
-                                .aspectRatio(Self.videoAspectRatio, contentMode: .fit)
+                                .frame(height: splitVideoHeight(width: proxy.size.width))
                                 .gesture(swipe.gesture(height: proxy.size.height) { nowPlaying.minimize() })
                                 .zIndex(1)
                         }
@@ -85,6 +85,11 @@ struct PlayerScreen: View {
         .onChange(of: engine.state == .playing) { _, playing in
             if playing, showsControls { scheduleHide() }
         }
+    }
+
+    /// The video fills the split's left column edge to edge.
+    private func splitVideoHeight(width: CGFloat) -> CGFloat {
+        (width * InfoPanelArrangement.splitLeadingFraction).rounded() / Self.videoAspectRatio
     }
 
     private func infoPanel<Header: View>(
