@@ -1,5 +1,6 @@
 import AVKit
 import AetherEngine
+import OSLog
 
 /// Picture in Picture on every video route: around the engine's AVPlayerLayer on the native
 /// routes, around its sample buffer layer on the software route. Starts by itself when the app
@@ -16,6 +17,8 @@ final class PictureInPicture: NSObject, AVPictureInPictureControllerDelegate,
     private var softwareSource: SoftwarePiPSource?
     private var attachedLayer: CALayer?
     private var possibleObservation: NSKeyValueObservation?
+
+    nonisolated private static let logger = Logger(subsystem: "nl.jellycast.ios", category: "pip")
 
     func attach(to engine: AetherEngine) {
         self.engine = engine
@@ -34,6 +37,7 @@ final class PictureInPicture: NSObject, AVPictureInPictureControllerDelegate,
         } else {
             return
         }
+        Self.logger.info("PiP attached to the \(engine.videoRoute.rawValue, privacy: .public) route")
         let controller = AVPictureInPictureController(contentSource: contentSource)
         controller.delegate = self
         controller.canStartPictureInPictureAutomaticallyFromInline = true
@@ -41,6 +45,7 @@ final class PictureInPicture: NSObject, AVPictureInPictureControllerDelegate,
             \.isPictureInPicturePossible, options: [.initial, .new]
         ) { [weak self] controller, _ in
             let possible = controller.isPictureInPicturePossible
+            Self.logger.info("PiP possible: \(possible, privacy: .public)")
             Task { @MainActor in self?.isPossible = possible }
         }
         attachedLayer = layer
@@ -73,6 +78,7 @@ final class PictureInPicture: NSObject, AVPictureInPictureControllerDelegate,
     nonisolated func pictureInPictureControllerWillStartPictureInPicture(
         _ controller: AVPictureInPictureController
     ) {
+        Self.logger.info("PiP starts")
         MainActor.assumeIsolated {
             isActive = true
             engine?.pictureInPictureActive = true
@@ -90,6 +96,7 @@ final class PictureInPicture: NSObject, AVPictureInPictureControllerDelegate,
         _ controller: AVPictureInPictureController,
         failedToStartPictureInPictureWithError error: any Error
     ) {
+        Self.logger.error("PiP failed to start: \(error, privacy: .public)")
         MainActor.assumeIsolated {
             isActive = false
             engine?.pictureInPictureActive = false

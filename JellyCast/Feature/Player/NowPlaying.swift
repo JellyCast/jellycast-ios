@@ -69,6 +69,9 @@ final class NowPlaying {
     /// and a window around a layer without a player never opens.
     func enteredBackground() {
         guard let engine = session?.engine, !pip.isActive else { return }
+        Self.logger.info(
+            "Background: PiP possible \(self.pip.isPossible, privacy: .public), route \(engine.videoRoute.rawValue, privacy: .public)"
+        )
         let wasPlaying = engine.state == .playing
         backgroundHandOff?.cancel()
         backgroundHandOff = Task {
@@ -128,20 +131,32 @@ struct NowPlayingObserver: View {
             }
             .onReceive(engine.$state) { state in
                 session.stateChanged(state)
-                nowPlaying.system.update()
-                nowPlaying.pip.playbackChanged()
+                playbackChanged()
                 if state == .ended { nowPlaying.itemEnded() }
             }
             .onReceive(engine.$isBuffering) { session.bufferingChanged($0) }
-            .onReceive(engine.$duration) { _ in nowPlaying.system.update() }
+            .onReceive(engine.$duration) { _ in playbackChanged() }
             .onReceive(engine.seekEvents) { event in
                 guard case .landed = event.outcome else { return }
                 session.seeked()
-                nowPlaying.system.update()
-                nowPlaying.pip.playbackChanged()
+                playbackChanged()
             }
-            .onReceive(engine.$videoRoute) { _ in nowPlaying.pip.attach(to: engine) }
-            .onReceive(engine.$softwarePiPSource) { _ in nowPlaying.pip.attach(to: engine) }
+            .onReceive(engine.$videoRoute) { _ in attachPictureInPicture() }
+            .onReceive(engine.$currentAVPlayer) { _ in attachPictureInPicture() }
+            .onReceive(engine.$softwarePiPSource) { _ in attachPictureInPicture() }
+    }
+
+    /// `@Published` sends before the value is stored, and the route is published before its
+    /// layer exists; reading them a turn later sees both.
+    private func attachPictureInPicture() {
+        Task { nowPlaying.pip.attach(to: engine) }
+    }
+
+    private func playbackChanged() {
+        Task {
+            nowPlaying.system.update()
+            nowPlaying.pip.playbackChanged()
+        }
     }
 }
 
