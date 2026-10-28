@@ -1,4 +1,6 @@
+import AVFoundation
 import AetherEngine
+import OSLog
 import SwiftUI
 
 /// The play that outlives the player screen: shown full size, minimized to the mini player, or none.
@@ -12,6 +14,10 @@ final class NowPlaying {
     /// The mini player's size, kept between plays: small in the corner, or the full portrait width.
     var isMiniPlayerLarge = false
     let pip = PictureInPicture()
+    let system = SystemNowPlaying()
+    private var detachedPlayer: (layer: AVPlayerLayer, player: AVPlayer)?
+
+    private static let logger = Logger(subsystem: "nl.jellycast.ios", category: "player")
 
     func play(
         _ playable: Playable, store: LibraryStore, streams: StreamSelection? = nil, queue: PlayQueue? = nil
@@ -48,8 +54,36 @@ final class NowPlaying {
         guard let session else { return }
         self.session = nil
         isExpanded = false
+        detachedPlayer = nil
+        system.clear()
         session.stop()
         session.engine.stop()
+    }
+
+    /// iOS pauses a player whose video is on screen when the app leaves. Without its layer the
+    /// native route plays on as sound; the software route drops its video by itself.
+    func enteredBackground() {
+        guard !pip.isActive, let layer = session?.engine.nativePlayerLayer, let player = layer.player
+        else { return }
+        layer.player = nil
+        detachedPlayer = (layer, player)
+    }
+
+    func becameActive() {
+        pip.stopIfActive()
+        if let detachedPlayer, detachedPlayer.layer.player == nil {
+            detachedPlayer.layer.player = detachedPlayer.player
+        }
+        detachedPlayer = nil
+        guard let engine = session?.engine, engine.needsForegroundVideoRestore else { return }
+        Task {
+            do {
+                try await engine.reloadAtCurrentPosition()
+            } catch is CancellationError {
+            } catch {
+                Self.logger.error("Restoring the video after the background failed: \(error)")
+            }
+        }
     }
 
     /// At the end of an item: the next item of the list or the next episode, or the end of the play.
@@ -68,19 +102,30 @@ struct NowPlayingObserver: View {
     let nowPlaying: NowPlaying
     let session: PlayerSession
     @ObservedObject var engine: AetherEngine
+    let client: JellyfinClient
 
     var body: some View {
         Color.clear
             .frame(width: 0, height: 0)
+            .task(id: session.playable.id) {
+                await nowPlaying.system.show(session.playable, engine: engine, client: client)
+            }
             .onReceive(engine.$state) { state in
                 session.stateChanged(state)
+                nowPlaying.system.update()
+                nowPlaying.pip.playbackChanged()
                 if state == .ended { nowPlaying.itemEnded() }
             }
             .onReceive(engine.$isBuffering) { session.bufferingChanged($0) }
+            .onReceive(engine.$duration) { _ in nowPlaying.system.update() }
             .onReceive(engine.seekEvents) { event in
-                if case .landed = event.outcome { session.seeked() }
+                guard case .landed = event.outcome else { return }
+                session.seeked()
+                nowPlaying.system.update()
+                nowPlaying.pip.playbackChanged()
             }
             .onReceive(engine.$videoRoute) { _ in nowPlaying.pip.attach(to: engine) }
+            .onReceive(engine.$softwarePiPSource) { _ in nowPlaying.pip.attach(to: engine) }
     }
 }
 

@@ -35,6 +35,15 @@ The user checks battery use over a full film, PiP and AirPlay on the iPhone.
 
 ## Decisions
 
+### Playing on in the background (2026-10-28)
+
+- Leaving the app while a video plays keeps it playing: in a PiP window when the video was on screen (full or mini player), as sound otherwise; locking the screen keeps the sound going. Back in the app the video goes on where the sound is.
+- Why it stopped before: iOS pauses an AVPlayer whose layer is on screen when the app leaves, and PiP only existed on the native routes. Now the native layer is detached from its player in the background (unless PiP is open) and put back on return; PiP also runs on the software route through the engine's `softwarePiPSource` (sample buffer PiP). A paused play the engine tore down after its 15 s grace window is reloaded at its position on return (`needsForegroundVideoRestore`).
+- The lock screen, Control Center and Dynamic Island show the play (`SystemNowPlaying`): image (backdrop or episode still), title, series and "S1 · E8" or the year, progress, play/pause, ±10 s and scrubbing; headphone buttons work too. Written to the shared `MPNowPlayingInfoCenter` on every route, not the engine's `MPNowPlayingSession`, so both routes behave the same.
+- Order in the Dynamic Island and on the lock screen: playing in the app, then the TV Live Activity, then nothing. The TV's activity ends while the app has a play and comes back when it closes.
+- The TV remote screen's volume button trick set the audio session to ambient and turned it off afterwards, which stopped a play in the app from going on in the background. It now puts the player's category back.
+- Built and checked to start in the simulator; PiP, the lock screen and the background can only be checked on a device. Installed on the iPhone 18 Pro Max and the iPad (the iPhone 14 was unreachable). Still to check: auto PiP on both routes (an MKV with DTS for the software route), locking during play, the lock screen buttons, the next episode starting in the background, and the TV activity coming back after closing the player.
+
 ### Live Activity for a TV (2026-10-28)
 
 - While the app runs and the TV bar shows a TV, that playback is a Live Activity: lock screen (image, series or movie, "S1 · E8 · title", "Playing on chromecast", a progress bar and remaining time that run by themselves, play/pause and ±10 s) and the Dynamic Island (compact: the brand mark and a progress ring; minimal: the ring; expanded: image, title, episode line, progress, play/pause). One activity, for the TV the TV bar shows; another TV ends it and starts a new one. It ends when the session is gone after an answer, on sign out and when Live Activities are off in Settings.

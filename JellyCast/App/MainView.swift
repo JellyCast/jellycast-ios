@@ -82,7 +82,7 @@ struct MainView: View {
         ) {} message: {
             Text(lists.changeError ?? "")
         }
-        .remotePlaybackActivity(remote, client: store.session.client)
+        .remotePlaybackActivity(remote, client: store.session.client, yieldsTo: nowPlaying.session != nil)
         .task { await store.start() }
         .task { await checkServerAtStart() }
         .task(id: store.index == nil) {
@@ -127,7 +127,11 @@ struct MainView: View {
             navigation.playQueue = nil
         }
         .onChange(of: scenePhase) { _, phase in
-            if phase == .active { nowPlaying.pip.stopIfActive() }
+            switch phase {
+            case .active: nowPlaying.becameActive()
+            case .background: nowPlaying.enteredBackground()
+            default: break
+            }
         }
         .onChange(of: remote.answeredAt) {
             showTVNowPlayingAtOpen()
@@ -293,7 +297,10 @@ private extension MainView {
     var miniPlayer: some View {
         if let session = nowPlaying.session {
             ZStack {
-                NowPlayingObserver(nowPlaying: nowPlaying, session: session, engine: session.engine)
+                NowPlayingObserver(
+                    nowPlaying: nowPlaying, session: session, engine: session.engine,
+                    client: store.session.client
+                )
                 if !nowPlaying.isExpanded {
                     MiniPlayer(
                         nowPlaying: nowPlaying, session: session, engine: session.engine,

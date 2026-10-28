@@ -36,6 +36,7 @@ struct HardwareVolumeButtons: UIViewRepresentable {
         private var baseline: Float = 0.5
         private var original: Float?
         private var activatedSession = false
+        private var previousCategory: AudioCategory?
 
         /// Away from the ends, so both buttons change the volume and can be read.
         private static let baselineRange: ClosedRange<Float> = 0.1...0.9
@@ -50,6 +51,7 @@ struct HardwareVolumeButtons: UIViewRepresentable {
         func start(with view: MPVolumeView) {
             volumeView = view
             Task {
+                previousCategory = AudioCategory.current
                 activatedSession = await Self.activateSession()
                 let session = AVAudioSession.sharedInstance()
                 let current = session.outputVolume
@@ -67,7 +69,10 @@ struct HardwareVolumeButtons: UIViewRepresentable {
             observation?.invalidate()
             observation = nil
             if let original { setVolume(original) }
-            if activatedSession {
+            if let previousCategory, previousCategory.category == .playback {
+                // The app's own player may still play; it needs its category back to go on in the background.
+                Task.detached { previousCategory.restore() }
+            } else if activatedSession {
                 Task.detached {
                     try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
                 }
@@ -100,5 +105,21 @@ struct HardwareVolumeButtons: UIViewRepresentable {
                 return false
             }
         }
+    }
+}
+
+/// The audio session's category, kept to put back what the player set.
+nonisolated private struct AudioCategory: Sendable {
+    let category: AVAudioSession.Category
+    let mode: AVAudioSession.Mode
+    let options: AVAudioSession.CategoryOptions
+
+    static var current: AudioCategory {
+        let session = AVAudioSession.sharedInstance()
+        return AudioCategory(category: session.category, mode: session.mode, options: session.categoryOptions)
+    }
+
+    func restore() {
+        try? AVAudioSession.sharedInstance().setCategory(category, mode: mode, options: options)
     }
 }
