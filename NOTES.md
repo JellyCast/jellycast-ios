@@ -35,6 +35,12 @@ The user checks battery use over a full film, PiP and AirPlay on the iPhone.
 
 ## Decisions
 
+### Now playing on a TV opens when the app opens (2026-10-28)
+
+- Opening the app (cold launch or back to the foreground) while a TV plays opens that TV's now playing screen, as if the TV bar was tapped. The decision is taken once per open, on the first successful sessions answer after opening, and only if that answer came within 5 s; on a cold launch it waits for the splash to finish. A later answer, a TV that starts while the app is in use, or the screen being closed leaves it to the TV bar until the next open.
+- Not when the app's own player plays (full or mini player, also PiP), not while any sheet, cover or alert is presented (checked on the UIKit root, so sheets of child views count too), and not when the remote screen is already open. With two TVs it takes the one the TV bar shows (the most recent). The rule is `NowPlayingAtOpen.session`; the wiring is `showTVNowPlayingAtOpen` in `MainView`.
+- Checked on the iPhone and the iPad: cold launch with the Chromecast playing opens its now playing screen. Not checked on a device: back to the foreground, closing it staying closed, and the cases that should skip it (tapping isn't possible from the Mac).
+
 ### Home as one tile grid (2026-10-28)
 
 - Home is a YouTube-style grid of 16:9 tiles instead of the hero and the horizontal rows (Up next, New, Not started). No headings, no filters: scroll, tap, long press.

@@ -13,8 +13,11 @@ struct MainView: View {
     @State private var screenShortSide: CGFloat = 0
     @State private var hasCheckedServer = false
     @State private var hasBeenActive = false
+    /// Set while this open still waits to decide on the now playing screen of a TV.
+    @State private var openedAt: ContinuousClock.Instant?
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.layout) private var layout
+    @Environment(\.isSplashShowing) private var isSplashShowing
 
     private static let miniPlayerBottomInset: CGFloat = 72
     /// The iPad draws the tab bar at the top, so only the margin is left at the bottom.
@@ -89,7 +92,11 @@ struct MainView: View {
             await DownloadStore.shared.tidy(index: index)
         }
         .task(id: scenePhase == .active) {
-            guard scenePhase == .active else { return }
+            guard scenePhase == .active else {
+                openedAt = nil
+                return
+            }
+            openedAt = .now
             async let check: Void = recheckServer()
             await remote.poll()
             await check
@@ -120,6 +127,8 @@ struct MainView: View {
         .onChange(of: scenePhase) { _, phase in
             if phase == .active { nowPlaying.pip.stopIfActive() }
         }
+        .onChange(of: remote.answeredAt) { showTVNowPlayingAtOpen() }
+        .onChange(of: isSplashShowing) { showTVNowPlayingAtOpen() }
         .alert(
             nowPlaying.startError ?? "",
             isPresented: Binding(
@@ -208,6 +217,21 @@ private extension MainView {
         await store.checkServer()
     }
 
+    /// Waits for the first answer after opening and for the splash, then decides once.
+    func showTVNowPlayingAtOpen() {
+        guard let openedAt, !isSplashShowing,
+              let answeredAt = remote.answeredAt, answeredAt >= openedAt
+        else { return }
+        self.openedAt = nil
+        let session = NowPlayingAtOpen.session(
+            remote.current,
+            answeredAfter: answeredAt - openedAt,
+            isPlayingHere: nowPlaying.session != nil,
+            isPresenting: remote.shownSessionID != nil || UIApplication.shared.isPresentingOverRoot
+        )
+        if let session { remote.show(session) }
+    }
+
     @ViewBuilder
     var wakingStatus: some View {
         if let name = remote.waking {
@@ -262,6 +286,16 @@ private extension MainView {
             .padding(.bottom, bottomInset)
             .animation(.easeOut(duration: 0.2), value: nowPlaying.isExpanded)
         }
+    }
+}
+
+private extension UIApplication {
+    /// A sheet, cover or alert anywhere in the app, also those presented by a child view.
+    var isPresentingOverRoot: Bool {
+        connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap(\.windows)
+            .contains { $0.rootViewController?.presentedViewController != nil }
     }
 }
 

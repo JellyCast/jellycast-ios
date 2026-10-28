@@ -11,6 +11,7 @@ final class RemoteSessions {
     private(set) var commandFailed = false
     /// The TV being woken and started right now, for a status on screen.
     private(set) var waking: String?
+    private(set) var answeredAt: ContinuousClock.Instant?
     /// The session the now playing screen shows; it stays open when that playback stops.
     var shownSessionID: String?
     /// The TV behind `shownSessionID`: its next episode can come back under another session.
@@ -103,6 +104,7 @@ final class RemoteSessions {
                 if let address = device.address { paired.update(deviceID: device.deviceID, host: address) }
             }
             failuresInARow = 0
+            answeredAt = .now
         } catch is CancellationError {
             return
         } catch {

@@ -32,6 +32,7 @@ struct RootView: View {
             if let library = app.library {
                 MainView(store: library) { app.signOut() }
                     .id(library.session.accessToken)
+                    .environment(\.isSplashShowing, showsSplash)
                     .onChange(of: library.isSessionExpired) { _, expired in
                         if expired { app.signOut() }
                     }
@@ -48,6 +49,10 @@ struct RootView: View {
         }
         .background(JellyCastColors.background)
     }
+}
+
+extension EnvironmentValues {
+    @Entry var isSplashShowing = false
 }
 
 @Observable

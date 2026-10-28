@@ -69,7 +69,7 @@ Today names and pairings live on each iPhone or iPad: every device pairs a Chrom
 
 1. How the TV bar shares the space with the download accessory, and later a Live Activity on the lock screen?
 2. Two sessions at once (both TVs): list, or the most recent one first?
-3. Should the now playing screen open by itself when the app starts while something plays, or only the TV bar?
+3. ~~Should the now playing screen open by itself when the app starts while something plays?~~ Yes, once per open (cold launch or back to the foreground), on the first answer within 5 s, and never while the app is in use; otherwise the TV bar. Details in `NOTES.md` (2026-10-28).
 4. After "Play on…": does the iPhone automatically follow that device?
 5. AirPlay (the route button in the player) is not checked on direct play and transcode.
 
