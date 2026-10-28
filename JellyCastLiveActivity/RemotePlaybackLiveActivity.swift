@@ -7,9 +7,8 @@ import WidgetKit
 struct RemotePlaybackLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: RemotePlaybackAttributes.self) { context in
+            // No tint: the system's glass material, as Music and YouTube use.
             LockScreenView(state: context.state, isStale: context.isStale)
-                .activityBackgroundTint(JellyCastColors.background)
-                .activitySystemActionForegroundColor(JellyCastColors.text)
         } dynamicIsland: { context in
             let state = context.state
             let isStale = context.isStale
@@ -81,11 +80,11 @@ private struct TitleLines: View {
         VStack(alignment: .leading, spacing: 2) {
             Text(state.title)
                 .font(.headline)
-                .foregroundStyle(JellyCastColors.text)
+                .foregroundStyle(.primary)
             if let episodeLine = state.episodeLine {
                 Text(episodeLine)
                     .font(.subheadline)
-                    .foregroundStyle(JellyCastColors.text)
+                    .foregroundStyle(.primary)
             }
             if showsDevice {
                 DeviceLine(state: state, isStale: isStale)
@@ -110,7 +109,7 @@ private struct DeviceLine: View {
             }
         }
         .font(.caption)
-        .foregroundStyle(JellyCastColors.textMuted)
+        .foregroundStyle(.secondary)
         .lineLimit(1)
     }
 }
@@ -126,7 +125,7 @@ private struct ProgressRow: View {
             bar
             remaining
                 .font(.caption.monospacedDigit())
-                .foregroundStyle(JellyCastColors.textMuted)
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.trailing)
                 .frame(width: Self.remainingWidth, alignment: .trailing)
         }
@@ -139,10 +138,10 @@ private struct ProgressRow: View {
             } currentValueLabel: {
                 EmptyView()
             }
-            .tint(JellyCastColors.progressMid)
+            .tint(.primary)
         } else {
             ProgressView(value: state.progress(at: .now))
-                .tint(JellyCastColors.progressMid)
+                .tint(.primary)
         }
     }
 
@@ -194,7 +193,7 @@ private struct SkipButton<Intent: LiveActivityIntent>: View {
                 .contentShape(.rect)
         }
         .buttonStyle(.plain)
-        .foregroundStyle(JellyCastColors.text)
+        .foregroundStyle(.primary)
         .accessibilityLabel(Text(label))
     }
 }
@@ -211,7 +210,7 @@ private struct PlayPauseButton: View {
                 .contentShape(.rect)
         }
         .buttonStyle(.plain)
-        .foregroundStyle(JellyCastColors.text)
+        .foregroundStyle(.primary)
         .accessibilityLabel(isPaused ? Text("Play") : Text("Pause"))
     }
 }
@@ -237,7 +236,7 @@ private struct Artwork: View {
             }
         }
         .frame(width: size.width, height: size.height)
-        .background(JellyCastColors.surface)
+        .background(.quaternary)
         .clipShape(.rect(cornerRadius: Self.cornerRadius))
     }
 
