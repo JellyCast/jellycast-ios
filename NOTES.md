@@ -35,6 +35,10 @@ The user checks battery use over a full film, PiP and AirPlay on the iPhone.
 
 ## Decisions
 
+### Swipe down in full screen leaves full screen (2026-10-28)
+
+In full screen (iPhone landscape, iPad video only) a swipe down returns to the regular player, the same as the full-screen button: the iPhone turns back to portrait, the iPad shows the info panel again. The video springs back instead of sliding away. From the regular player a swipe down still minimizes to the mini player.
+
 ### Now playing on a TV opens when the app opens (2026-10-28)
 
 - Opening the app (cold launch or back to the foreground) while a TV plays opens that TV's now playing screen, as if the TV bar was tapped. The decision is taken once per open, on the first successful sessions answer after opening, and only if that answer came within 5 s; on a cold launch it waits for the splash to finish. A later answer, a TV that starts while the app is in use, or the screen being closed leaves it to the TV bar until the next open.

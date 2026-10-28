@@ -3,7 +3,8 @@ import SwiftUI
 
 /// The player: in portrait the video on top with the info below, turned sideways full screen.
 /// On the iPad landscape puts the info beside the video, and full screen is a choice.
-/// A swipe down hands the video to the mini player; the play itself lives in `NowPlaying`.
+/// A swipe down leaves full screen, or else hands the video to the mini player; the play itself
+/// lives in `NowPlaying`.
 struct PlayerScreen: View {
     let nowPlaying: NowPlaying
     let session: PlayerSession
@@ -35,7 +36,7 @@ struct PlayerScreen: View {
                         infoPanel(arrangement: .split) {
                             videoArea(fullscreen: false, insets: proxy.safeAreaInsets)
                                 .frame(height: splitVideoHeight(width: proxy.size.width))
-                                .gesture(swipe.gesture(height: proxy.size.height) { nowPlaying.minimize() })
+                                .gesture(swipe.gesture(height: proxy.size.height, onClose: swipedDown))
                                 .zIndex(1)
                         }
                         // Black like the video's own bars, so the picture doesn't sit in a box.
@@ -45,7 +46,12 @@ struct PlayerScreen: View {
                             videoArea(fullscreen: fullscreen, insets: proxy.safeAreaInsets)
                                 .frame(height: fullscreen ? nil : proxy.size.width / Self.videoAspectRatio)
                                 .ignoresSafeArea(edges: fullscreen ? .all : [])
-                                .gesture(swipe.gesture(height: proxy.size.height) { nowPlaying.minimize() })
+                                .gesture(
+                                    swipe.gesture(
+                                        height: proxy.size.height, slidesAway: !fullscreen,
+                                        onClose: swipedDown
+                                    )
+                                )
                                 .zIndex(1)
                             if !fullscreen {
                                 infoPanel(arrangement: .column) { EmptyView() }
@@ -172,14 +178,26 @@ struct PlayerScreen: View {
         }
     }
 
-    /// The iPhone turns the screen; the iPad, held either way, switches to the video alone and back.
     private func toggleFullscreen() {
-        if layout.isRegular {
-            withAnimation(.easeOut(duration: 0.2)) { isVideoOnly.toggle() }
-        } else {
-            OrientationLock.rotate(to: isFullscreen ? .portrait : .landscape)
-        }
+        setFullscreen(!isFullscreen)
         scheduleHide()
+    }
+
+    private func swipedDown() {
+        if isFullscreen {
+            setFullscreen(false)
+        } else {
+            nowPlaying.minimize()
+        }
+    }
+
+    /// The iPhone turns the screen; the iPad, held either way, switches to the video alone and back.
+    private func setFullscreen(_ fullscreen: Bool) {
+        if layout.isRegular {
+            withAnimation(.easeOut(duration: 0.2)) { isVideoOnly = fullscreen }
+        } else {
+            OrientationLock.rotate(to: fullscreen ? .landscape : .portrait)
+        }
     }
 
     private func followDeviceRotation() async {

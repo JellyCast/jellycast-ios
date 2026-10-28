@@ -16,7 +16,9 @@ final class SwipeToClose {
     }
 
     /// `onClose` runs once the screen has slid away, without animation: the screen is gone already.
-    func gesture(height: CGFloat, onClose: @escaping () -> Void) -> some Gesture {
+    /// With `slidesAway` false the screen springs back instead and `onClose` runs right away, for a
+    /// swipe that changes the screen's layout rather than closing it.
+    func gesture(height: CGFloat, slidesAway: Bool = true, onClose: @escaping () -> Void) -> some Gesture {
         DragGesture(minimumDistance: 16, coordinateSpace: .global)
             .onChanged { value in
                 guard !self.isClosing, value.translation.height > abs(value.translation.width) || self.offset > 0
@@ -25,9 +27,12 @@ final class SwipeToClose {
             }
             .onEnded { value in
                 guard self.offset > 0 else { return }
-                if self.offset > Self.closeDistance || value.predictedEndTranslation.height > height / 2 {
+                let isLongEnough = self.offset > Self.closeDistance
+                    || value.predictedEndTranslation.height > height / 2
+                if isLongEnough, slidesAway {
                     self.close(height: height, then: onClose)
                 } else {
+                    if isLongEnough { onClose() }
                     withAnimation(.spring(duration: 0.25)) { self.offset = 0 }
                 }
             }
