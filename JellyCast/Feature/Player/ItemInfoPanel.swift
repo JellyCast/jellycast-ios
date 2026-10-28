@@ -17,6 +17,8 @@ struct ItemInfoPanel<Header: View, Actions: View>: View {
     let store: LibraryStore
     var showsTitle = true
     var arrangement = InfoPanelArrangement.column
+    /// What the panel sits on; the chat input covers the content scrolling under it with it.
+    var surface = JellyCastColors.background
     /// Set while a TV plays it, so the episode list says where.
     var playingOn: String?
     /// Room to keep free above the tab bar when a tab scrolls it up, where the panel runs under
@@ -255,7 +257,7 @@ struct ItemInfoPanel<Header: View, Actions: View>: View {
             .padding(.horizontal, margin)
             .padding(.vertical, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(JellyCastColors.background)
+            .background(surface)
             .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { chatInputHeight = $0 }
         }
     }

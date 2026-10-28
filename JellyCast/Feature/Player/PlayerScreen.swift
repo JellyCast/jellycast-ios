@@ -37,7 +37,8 @@ struct PlayerScreen: View {
                                 .gesture(swipe.gesture(height: proxy.size.height) { nowPlaying.minimize() })
                                 .zIndex(1)
                         }
-                        .background { JellyCastColors.background.ignoresSafeArea(edges: .bottom) }
+                        // Black like the video's own bars, so the picture doesn't sit in a box.
+                        .background { Color.black.ignoresSafeArea(edges: .bottom) }
                     } else {
                         VStack(spacing: 0) {
                             videoArea(fullscreen: fullscreen, insets: proxy.safeAreaInsets)
@@ -96,7 +97,8 @@ struct PlayerScreen: View {
         arrangement: InfoPanelArrangement, @ViewBuilder header: () -> Header
     ) -> some View {
         ItemInfoPanel(
-            playable: session.playable, mediaInfo: session.mediaInfo, store: store, arrangement: arrangement
+            playable: session.playable, mediaInfo: session.mediaInfo, store: store, arrangement: arrangement,
+            surface: arrangement == .split ? .black : JellyCastColors.background
         ) { next in
             nowPlaying.play(next, store: store)
         } header: {
