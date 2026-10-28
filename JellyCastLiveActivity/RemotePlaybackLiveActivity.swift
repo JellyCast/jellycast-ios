@@ -7,8 +7,9 @@ import WidgetKit
 struct RemotePlaybackLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: RemotePlaybackAttributes.self) { context in
-            // No tint: the system's glass material, as Music and YouTube use.
+            // Clear, so the lock screen's own glass shows through, as with the system's players.
             LockScreenView(state: context.state, isStale: context.isStale)
+                .activityBackgroundTint(.clear)
         } dynamicIsland: { context in
             let state = context.state
             let isStale = context.isStale
