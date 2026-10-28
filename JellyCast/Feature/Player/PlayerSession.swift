@@ -44,6 +44,7 @@ final class PlayerSession {
     private var cache: StreamCache?
     private var startNowRequested = false
     private var bufferWatchTask: Task<Void, Never>?
+    private var audioDelayTask: Task<Void, Never>?
     /// Where a play that failed halfway was, so "Try again" goes on from there.
     private var failedAtSeconds: Double?
 
@@ -168,8 +169,9 @@ final class PlayerSession {
             try await engine.load(
                 url: stream.url,
                 startPosition: startSeconds > 0 ? startSeconds : nil,
-                options: LoadOptions(httpHeaders: ["Authorization": session.client.authorizationHeader])
+                options: Self.loadOptions(headers: ["Authorization": session.client.authorizationHeader])
             )
+            followAudioDelay()
             if !stream.isTranscode {
                 if !selectRequestedTracks(requested, info: info) { selectPreferredAudioTrack(languages: languages) }
             }
@@ -199,7 +201,10 @@ final class PlayerSession {
     private func loadDownloaded(_ file: URL, startSeconds: Double) async {
         Self.logger.info("Playing the download \(file.lastPathComponent, privacy: .public)")
         do {
-            try await engine.load(url: file, startPosition: startSeconds > 0 ? startSeconds : nil)
+            try await engine.load(
+                url: file, startPosition: startSeconds > 0 ? startSeconds : nil, options: Self.loadOptions()
+            )
+            followAudioDelay()
             startPhase = .started
             engine.play()
             playsDownload = true
@@ -523,6 +528,7 @@ final class PlayerSession {
     func stop() {
         progressTask?.cancel()
         bufferWatchTask?.cancel()
+        audioDelayTask?.cancel()
         buffer.stop()
         startNowRequested = true
         if let cache {
@@ -577,6 +583,23 @@ final class PlayerSession {
         transcodeSubtitleIndex = nil
         failedAtSeconds = nil
         await load()
+    }
+
+    private static func loadOptions(headers: [String: String] = [:]) -> LoadOptions {
+        var options = LoadOptions(httpHeaders: headers)
+        options.audioDelaySeconds = AudioOutputDelay.shared.engineAudioDelaySeconds
+        return options
+    }
+
+    /// Moves the sound when another Bluetooth device takes over or the correction is changed.
+    private func followAudioDelay() {
+        audioDelayTask?.cancel()
+        audioDelayTask = Task { [weak self] in
+            let delays = Observations { AudioOutputDelay.shared.engineAudioDelaySeconds }
+            for await seconds in delays {
+                self?.engine.setAudioDelay(seconds)
+            }
+        }
     }
 
     private func startProgressReports() {

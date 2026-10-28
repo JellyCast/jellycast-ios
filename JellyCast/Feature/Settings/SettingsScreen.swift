@@ -42,6 +42,7 @@ struct SettingsScreen: View {
                     settings: QualitySettings.shared, network: NetworkMonitor.shared,
                     serverURL: store.session.serverURL
                 )
+                AudioDelaySettingsSection(delay: AudioOutputDelay.shared)
                 DownloadSettingsSection(settings: DownloadSettings.shared)
                 RatingSettingsSection(settings: RatingSettings.shared)
                 Section {
@@ -118,6 +119,32 @@ private struct RatingSettingsSection: View {
         case .tmdb:
             String(localized: """
                 Links to TMDB. The server keeps a TMDB rating for episodes only. Descriptions come from IMDb.
+                """)
+        }
+    }
+}
+
+/// The lip-sync corrections set in the player, per Bluetooth device; here only to look back at.
+private struct AudioDelaySettingsSection: View {
+    let delay: AudioOutputDelay
+
+    var body: some View {
+        Section {
+            if delay.saved.isEmpty {
+                Text("None yet").foregroundStyle(JellyCastColors.textMuted)
+            }
+            ForEach(delay.saved.sorted { $0.value.name < $1.value.name }, id: \.key) { id, device in
+                LabeledContent(device.name, value: "\(device.milliseconds) ms")
+                    .swipeActions {
+                        Button("Remove", role: .destructive) { delay.remove(id: id) }
+                    }
+            }
+        } header: {
+            Text("Bluetooth sound delay")
+        } footer: {
+            Text("""
+                Set in the player, under Audio and subtitles, while the device plays. It applies \
+                whenever that device plays again.
                 """)
         }
     }

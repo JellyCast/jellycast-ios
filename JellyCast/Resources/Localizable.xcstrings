@@ -3696,6 +3696,86 @@
           }
         }
       }
+    },
+    "Sound delay": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geluidsvertraging"
+          }
+        }
+      }
+    },
+    "Sound behind the picture? Move it until the lips match.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loopt het geluid achter op het beeld? Schuif tot de lippen gelijk lopen."
+          }
+        }
+      }
+    },
+    "Less delay": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minder vertraging"
+          }
+        }
+      }
+    },
+    "More delay": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meer vertraging"
+          }
+        }
+      }
+    },
+    "None yet": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nog geen"
+          }
+        }
+      }
+    },
+    "Bluetooth sound delay": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geluidsvertraging bij Bluetooth"
+          }
+        }
+      }
+    },
+    "Set in the player, under Audio and subtitles, while the device plays. It applies whenever that device plays again.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stel je in de speler in, onder Audio en ondertitels, terwijl het apparaat speelt. Het geldt elke keer dat dat apparaat weer speelt."
+          }
+        }
+      }
+    },
+    "%lld ms": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld ms"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -17,6 +17,8 @@ struct TrackSheet: View {
     let selectedSubtitle: Int?
     let onSelectAudio: (Int) -> Void
     let onSelectSubtitle: (Int?) -> Void
+    /// Only where this device plays the sound; a TV keeps its own sync.
+    var showsAudioDelay = false
 
     var body: some View {
         ScrollView {
@@ -38,6 +40,10 @@ struct TrackSheet: View {
                     ) {
                         if choice.id != selectedSubtitle { onSelectSubtitle(choice.id) }
                     }
+                }
+                if showsAudioDelay, let device = AudioOutputDelay.shared.currentDevice {
+                    section("Sound delay").padding(.top, 8)
+                    AudioDelayControl(device: device)
                 }
             }
             .padding(20)
@@ -107,7 +113,8 @@ struct PlayerTrackSheet: View {
                 subtitles: TrackSheet.subtitleChoices(info.subtitleStreams),
                 selectedSubtitle: session.transcodeSubtitleIndex,
                 onSelectAudio: { index in Task { await session.selectTranscodeAudio(streamIndex: index) } },
-                onSelectSubtitle: { index in Task { await session.selectTranscodeSubtitle(streamIndex: index) } }
+                onSelectSubtitle: { index in Task { await session.selectTranscodeSubtitle(streamIndex: index) } },
+                showsAudioDelay: true
             )
         } else {
             TrackSheet(
@@ -118,7 +125,8 @@ struct PlayerTrackSheet: View {
                 onSelectAudio: { engine.selectAudioTrack(index: $0) },
                 onSelectSubtitle: { index in
                     if let index { engine.selectSubtitleTrack(index: index) } else { engine.clearSubtitle() }
-                }
+                },
+                showsAudioDelay: true
             )
         }
     }
