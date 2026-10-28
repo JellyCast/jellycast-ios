@@ -17,6 +17,18 @@ struct RefreshableScrollView<Content: View>: View {
     private static var indicatorBottomSpacing: CGFloat { 8 }
     private static var minimumRefreshDuration: Duration { .milliseconds(600) }
 
+    /// Under the bars when the content starts below them (the iPad's tab bar sits there), in the
+    /// navigation bar otherwise.
+    private var indicatorTop: CGFloat {
+        padsSafeAreaTop
+            ? topInset + Self.indicatorBottomSpacing
+            : topInset - Self.indicatorSize - Self.indicatorBottomSpacing
+    }
+
+    private var refreshingSpace: CGFloat {
+        padsSafeAreaTop ? Self.indicatorSize + 2 * Self.indicatorBottomSpacing : topInset
+    }
+
     private var pullProgress: Double {
         guard topInset > 0 else { return 0 }
         return min(pullDistance / topInset, 1)
@@ -24,7 +36,7 @@ struct RefreshableScrollView<Content: View>: View {
 
     var body: some View {
         ScrollView {
-            content.padding(.top, (padsSafeAreaTop ? topInset : 0) + (isRefreshing ? topInset : 0))
+            content.padding(.top, (padsSafeAreaTop ? topInset : 0) + (isRefreshing ? refreshingSpace : 0))
         }
         .onScrollGeometryChange(for: CGFloat.self) { geometry in
             max(0, -(geometry.contentOffset.y + geometry.contentInsets.top))
@@ -37,7 +49,7 @@ struct RefreshableScrollView<Content: View>: View {
         .overlay(alignment: .top) {
             PullToRefreshIndicator(progress: pullProgress, isRefreshing: isRefreshing)
                 .frame(width: Self.indicatorSize, height: Self.indicatorSize)
-                .padding(.top, topInset - Self.indicatorSize - Self.indicatorBottomSpacing)
+                .padding(.top, indicatorTop)
                 .allowsHitTesting(false)
         }
         .sensoryFeedback(.impact(weight: .light), trigger: pullProgress >= 1) { _, reached in
