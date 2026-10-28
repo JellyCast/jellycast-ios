@@ -59,7 +59,7 @@ struct HomeScreen: View {
             await store.refresh()
         } content: {
             HomeGrid(items: feed, metrics: metrics) { item, size, style in
-                HomeTile(item: item, index: index, width: size.width, imageHeight: size.height, style: style)
+                HomeTile(item: item, index: index, size: size, style: style)
             } featuredOverlay: {
                 if !layout.isRegular { profileButton.padding(Self.profileInset) }
             }
@@ -107,7 +107,7 @@ private struct HomeSkeleton: View {
 }
 
 private struct SkeletonTile: View {
-    let size: CGSize
+    let size: HomeTileSize
     let style: HomeTileStyle
 
     private static let titleWidthFraction: CGFloat = 0.6
@@ -117,7 +117,8 @@ private struct SkeletonTile: View {
         VStack(alignment: .leading, spacing: 0) {
             RoundedRectangle(cornerRadius: style.cornerRadius)
                 .fill(JellyCastColors.surface)
-                .frame(width: size.width, height: size.height)
+                .frame(width: size.width, height: size.imageHeight)
+                .frame(maxHeight: size.imageHeight == nil ? .infinity : nil)
             bar(width: size.width * Self.titleWidthFraction, lineHeight: style.titleLineHeight)
                 .padding(.top, style.imageToTitle)
             bar(width: size.width * Self.metaWidthFraction, lineHeight: style.metaLineHeight)

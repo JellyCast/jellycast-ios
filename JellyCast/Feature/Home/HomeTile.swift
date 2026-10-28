@@ -27,17 +27,13 @@ struct HomeTileStyle {
     var titleToMeta: CGFloat { isFeatured ? 4 : 2 }
     var titleLineHeight: CGFloat { (titleSize * Self.lineHeightPerPoint).rounded(.up) }
     var metaLineHeight: CGFloat { (metaSize * Self.lineHeightPerPoint).rounded(.up) }
-
-    /// Everything under the image; fixed, so every tile in a row has the same height.
-    var textHeight: CGFloat { imageToTitle + titleLineHeight + titleToMeta + metaLineHeight }
 }
 
 /// A 16:9 image with the title and one meta line under it, as on YouTube.
 struct HomeTile: View {
     let item: HomeItem
     let index: LibraryIndex
-    let width: CGFloat
-    let imageHeight: CGFloat
+    let size: HomeTileSize
     let style: HomeTileStyle
 
     @Environment(AppNavigation.self) private var navigation
@@ -45,7 +41,7 @@ struct HomeTile: View {
     var body: some View {
         Button(action: open) {
             VStack(alignment: .leading, spacing: 0) {
-                HomeTileImage(item: item, index: index, size: CGSize(width: width, height: imageHeight), style: style)
+                HomeTileImage(item: item, index: index, size: size, style: style)
                 Text(item.title)
                     .font(style.titleFont)
                     .foregroundStyle(JellyCastColors.text)
@@ -59,7 +55,7 @@ struct HomeTile: View {
             }
             .lineLimit(1)
             .truncationMode(.tail)
-            .frame(width: width, alignment: .leading)
+            .frame(width: size.width, alignment: .leading)
             .contentShape(.rect)
         }
         .buttonStyle(PressedOpacityButtonStyle())
@@ -81,7 +77,7 @@ struct HomeTile: View {
 private struct HomeTileImage: View {
     let item: HomeItem
     let index: LibraryIndex
-    let size: CGSize
+    let size: HomeTileSize
     let style: HomeTileStyle
 
     private static let badgeInsetPhone: CGFloat = 8
@@ -90,14 +86,15 @@ private struct HomeTileImage: View {
     var body: some View {
         let inset = style.isPhone ? Self.badgeInsetPhone : Self.badgeInset
         RemoteImage(ref: item.image, type: item.imageType, width: size.width)
-            .frame(width: size.width, height: size.height)
+            .frame(width: size.width, height: size.imageHeight)
+            .frame(maxHeight: size.imageHeight == nil ? .infinity : nil)
             .overlay(alignment: .topLeading) {
                 if let label = item.label {
                     TileLabel(label: label, isPhone: style.isPhone).padding(inset)
                 }
             }
             .overlay(alignment: .bottomTrailing) {
-                if let time = item.timeLabel(index) {
+                if let time = timeLabel {
                     TimeBadge(text: time, isSmallPhone: style.isSmallPhone)
                         .padding(.trailing, inset)
                         .padding(.bottom, inset + (item.progress == nil ? 0 : style.progressHeight))
@@ -112,6 +109,12 @@ private struct HomeTileImage: View {
                 }
             }
             .clipShape(.rect(cornerRadius: style.cornerRadius))
+    }
+
+    /// The iPhone's tiles are too small to carry a runtime as well; only the time left stays.
+    private var timeLabel: String? {
+        if style.isPhone, item.progress == nil { return nil }
+        return item.timeLabel(index)
     }
 }
 
