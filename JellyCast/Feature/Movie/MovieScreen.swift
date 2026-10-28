@@ -34,6 +34,8 @@ struct MovieScreen: View {
         GeometryReader { proxy in
             let isSplit = layout.isRegular && proxy.size.width > proxy.size.height
             panel(movie, arrangement: isSplit ? .split : .column)
+                .toolbarVisibility(isSplit ? .hidden : .automatic, for: .navigationBar)
+                .overlay(alignment: .topLeading) { if isSplit { DetailBackButton() } }
         }
     }
 

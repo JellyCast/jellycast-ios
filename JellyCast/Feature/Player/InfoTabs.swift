@@ -27,7 +27,7 @@ struct InfoTabBar: View {
     let tabs: [InfoTab]
     @Binding var selection: InfoTab
 
-    private static let height: CGFloat = 40
+    static let height: CGFloat = 40
     private static let inset: CGFloat = 3
     private static let selectedFill = Color(white: 0.35)
 

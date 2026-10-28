@@ -123,10 +123,14 @@ struct ItemInfoPanel<Header: View, Actions: View>: View {
         withAnimation { scrollPosition.scrollTo(y: target) }
     }
 
-    /// The Back button floats over the header only, so the tabs beside it need just the status bar.
-    private var splitTabBarClearance: CGFloat {
-        min(tabBarTopClearance, DetailHero<EmptyView>.statusBarHeight)
+    /// On a detail page the tabs sit on one line with the `DetailBackButton` over the header.
+    private var splitTabBarTop: CGFloat {
+        guard tabBarTopClearance > 0 else { return Self.splitTabBarTopInPlayer }
+        return DetailHero<EmptyView>.statusBarHeight + DetailBackButton.top
+            + (DetailBackButton.size - InfoTabBar.height) / 2
     }
+
+    private static var splitTabBarTopInPlayer: CGFloat { 18 }
 
     private var split: some View {
         GeometryReader { proxy in
@@ -146,7 +150,7 @@ struct ItemInfoPanel<Header: View, Actions: View>: View {
                 VStack(spacing: 0) {
                     InfoTabBar(tabs: tabs, selection: tabSelection)
                         .padding(.horizontal, Self.splitTrailingPadding)
-                        .padding(.top, 18 + splitTabBarClearance)
+                        .padding(.top, splitTabBarTop)
                         .padding(.bottom, 8)
                     ScrollViewReader { scroll in
                         ScrollView {

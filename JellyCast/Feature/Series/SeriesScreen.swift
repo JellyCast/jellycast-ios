@@ -56,6 +56,8 @@ struct SeriesScreen: View {
                 }
             }
             .ignoresSafeArea(edges: .top)
+            .toolbarVisibility(isSplit ? .hidden : .automatic, for: .navigationBar)
+            .overlay(alignment: .topLeading) { if isSplit { DetailBackButton() } }
         }
     }
 

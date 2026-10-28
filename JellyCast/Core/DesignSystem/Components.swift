@@ -47,6 +47,22 @@ struct GlassCircleButton: View {
     }
 }
 
+/// The Back button over a detail page's header while the navigation bar is hidden (iPad
+/// landscape): the bar would sit over the tabs beside the header and take their taps.
+struct DetailBackButton: View {
+    static let top: CGFloat = 8
+    static let size: CGFloat = 44
+    private static let leading: CGFloat = 16
+
+    @Environment(AppNavigation.self) private var navigation
+
+    var body: some View {
+        GlassCircleButton(systemImage: "chevron.left", label: "Back") { navigation.goBack() }
+            .padding(.leading, Self.leading)
+            .padding(.top, DetailHero<EmptyView>.statusBarHeight + Self.top)
+    }
+}
+
 /// A round button on the rail color, next to the accent button.
 struct RailCircleButton: View {
     let systemImage: String
