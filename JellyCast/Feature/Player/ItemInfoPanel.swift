@@ -123,6 +123,11 @@ struct ItemInfoPanel<Header: View, Actions: View>: View {
         withAnimation { scrollPosition.scrollTo(y: target) }
     }
 
+    /// The Back button floats over the header only, so the tabs beside it need just the status bar.
+    private var splitTabBarClearance: CGFloat {
+        min(tabBarTopClearance, DetailHero<EmptyView>.statusBarHeight)
+    }
+
     private var split: some View {
         GeometryReader { proxy in
             let leadingWidth = (proxy.size.width * InfoPanelArrangement.splitLeadingFraction).rounded()
@@ -141,7 +146,7 @@ struct ItemInfoPanel<Header: View, Actions: View>: View {
                 VStack(spacing: 0) {
                     InfoTabBar(tabs: tabs, selection: tabSelection)
                         .padding(.horizontal, Self.splitTrailingPadding)
-                        .padding(.top, 18 + tabBarTopClearance)
+                        .padding(.top, 18 + splitTabBarClearance)
                         .padding(.bottom, 8)
                     ScrollViewReader { scroll in
                         ScrollView {

@@ -42,7 +42,7 @@ struct DetailHero<Overlay: View>: View {
     }
 
     /// The scroll view under the hero ignores the safe area, so the inset comes from the window.
-    private static var statusBarHeight: CGFloat {
+    static var statusBarHeight: CGFloat {
         keyWindow?.safeAreaInsets.top ?? 0
     }
 
