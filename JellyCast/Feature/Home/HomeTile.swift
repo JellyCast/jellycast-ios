@@ -261,7 +261,7 @@ extension HomeItem {
 
     var image: ImageRef? {
         switch self {
-        case .continueWatching(.episode(let episode)): episode.still ?? episode.seriesBackdrop
+        case .continueWatching(.episode(let episode)): episode.seriesBackdrop ?? episode.seriesPoster
         case .continueWatching(.movie(let movie)), .newMovie(let movie), .notStartedMovie(let movie):
             movie.backdrop ?? movie.poster
         case .newEpisodes(let series, _, _, _), .notStartedSeries(let series):
@@ -271,7 +271,7 @@ extension HomeItem {
 
     var imageType: JellyfinClient.ImageType {
         switch self {
-        case .continueWatching(.episode(let episode)): episode.still == nil ? .backdrop : .primary
+        case .continueWatching(.episode(let episode)): episode.seriesBackdrop == nil ? .primary : .backdrop
         case .continueWatching(.movie(let movie)), .newMovie(let movie), .notStartedMovie(let movie):
             movie.backdrop == nil ? .primary : .backdrop
         case .newEpisodes(let series, _, _, _), .notStartedSeries(let series):
