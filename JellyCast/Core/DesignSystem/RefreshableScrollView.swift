@@ -4,6 +4,8 @@ import SwiftUI
 /// system refresh control would sit behind the full-bleed image at the top. The indicator sits in
 /// the navigation bar; while refreshing, the content stays pushed down below it.
 struct RefreshableScrollView<Content: View>: View {
+    /// Starts the content below the status and navigation bars instead of under them.
+    var padsSafeAreaTop = false
     let action: () async -> Void
     @ViewBuilder let content: Content
 
@@ -22,7 +24,7 @@ struct RefreshableScrollView<Content: View>: View {
 
     var body: some View {
         ScrollView {
-            content.padding(.top, isRefreshing ? topInset : 0)
+            content.padding(.top, (padsSafeAreaTop ? topInset : 0) + (isRefreshing ? topInset : 0))
         }
         .onScrollGeometryChange(for: CGFloat.self) { geometry in
             max(0, -(geometry.contentOffset.y + geometry.contentInsets.top))

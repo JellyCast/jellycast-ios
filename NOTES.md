@@ -35,6 +35,17 @@ The user checks battery use over a full film, PiP and AirPlay on the iPhone.
 
 ## Decisions
 
+### Home as one tile grid (2026-10-28)
+
+- Home is a YouTube-style grid of 16:9 tiles instead of the hero and the horizontal rows (Up next, New, Not started). No headings, no filters: scroll, tap, long press.
+- Order (`LibraryIndex.homeFeed`): Continue watching (`continueWatching`), then New (`newEntries`, last 30 days), then Not started: series (`notStartedSeries`), then unwatched movies (`notStartedMovies`), each newest added first. Each movie or series shows once, in the first group it is in; an episode counts as its series.
+- Tap does what the old cards did: a Continue watching tile plays (as the Up next cards did; the hero's backdrop opened the page, its frame played), a New or Not started tile opens the series page or movie detail.
+- iPhone: no navigation bar on Home; the grid starts under the status bar and the profile button sits on the first tile. iPad: the top tab bar and the profile button in the toolbar stay. iPad landscape: 3 columns, the first tile spans 2 columns and 2 rows, its image cropped so its bottom lines up with the two tiles beside it.
+- Title and meta are one line each, so every tile in a row has the same height.
+- The "All" link of New to the library sorted by newest went with the row.
+- Found on the iPhone 18 Pro Max: measuring the top safe area from a background view of Home fed back into Home's own height and SwiftUI never settled (watchdog kill at launch, 0x8BADF00D). Not on the iPhone 17 simulator or the iPad. `RefreshableScrollView(padsSafeAreaTop:)` now pads the content by the inset it measures itself.
+- No unit test target exists yet, so `homeFeed` has no test.
+
 ### Rating site setting (2026-10-25)
 
 - Settings → Ratings picks IMDb (default), Rotten Tomatoes or TMDB for the rating next to a title and every title and person link. The server holds one community rating and one text per item, so the server was changed instead of the app fetching from the sites itself (that would need an API key per user): OMDb before TMDb for movies and series, then a full metadata refresh. Texts are IMDb's whatever the setting.

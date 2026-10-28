@@ -8,10 +8,7 @@ struct LayoutMetrics {
     var margin: CGFloat { isRegular ? 32 : 20 }
     /// The widest a block of running text gets, so lines stay readable.
     var textMaxWidth: CGFloat { isRegular ? 640 : .infinity }
-    var upNextCardWidth: CGFloat { isRegular ? 300 : 220 }
-    var posterWidth: CGFloat { isRegular ? 150 : 120 }
     var castImageSize: CGFloat { isRegular ? 88 : 72 }
-    var cardSpacing: CGFloat { isRegular ? 16 : 12 }
     var heroLogoSize: CGSize { isRegular ? CGSize(width: 420, height: 120) : CGSize(width: 280, height: 80) }
 }
 

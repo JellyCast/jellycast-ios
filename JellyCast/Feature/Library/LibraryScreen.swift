@@ -6,7 +6,6 @@ struct LibraryScreen: View {
     let store: LibraryStore
     let search: SearchModel
 
-    @Environment(AppNavigation.self) private var navigation
     @State private var filters = LibraryFilters()
     @FocusState private var isSearchFocused: Bool
 
@@ -40,12 +39,6 @@ struct LibraryScreen: View {
         }
         .task(id: search.trimmedQuery) { await search.searchPeople(session: store.session) }
         .refreshable { await store.refresh() }
-        .onChange(of: navigation.librarySortRequest, initial: true) { _, request in
-            guard let request else { return }
-            filters.sort = request
-            filters.status = nil
-            navigation.librarySortRequest = nil
-        }
     }
 
     private var genreCounts: [(genre: String, count: Int)] {

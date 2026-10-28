@@ -971,26 +971,6 @@
         }
       }
     },
-    "Series · %lld new": {
-      "localizations": {
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Serie · %lld nieuw"
-          }
-        }
-      }
-    },
-    "Series · new season": {
-      "localizations": {
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Serie · nieuw seizoen"
-          }
-        }
-      }
-    },
     "Server": {
       "localizations": {
         "nl": {
@@ -1127,16 +1107,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nu starten"
-          }
-        }
-      }
-    },
-    "Start something new": {
-      "localizations": {
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Iets nieuws beginnen"
           }
         }
       }
@@ -1291,16 +1261,6 @@
         }
       }
     },
-    "Up next": {
-      "localizations": {
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Volgende"
-          }
-        }
-      }
-    },
     "Up to date": {
       "localizations": {
         "nl": {
@@ -1347,36 +1307,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jaar"
-          }
-        }
-      }
-    },
-    "in progress and next episode": {
-      "localizations": {
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "bezig en volgende aflevering"
-          }
-        }
-      }
-    },
-    "last 30 days": {
-      "localizations": {
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "laatste 30 dagen"
-          }
-        }
-      }
-    },
-    "series you haven't begun": {
-      "localizations": {
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "nog niet gekeken"
           }
         }
       }
@@ -3613,6 +3543,156 @@
           "stringUnit": {
             "state": "translated",
             "value": "Terug"
+          }
+        }
+      }
+    },
+    "Not watched yet": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nog niet gezien"
+          }
+        }
+      }
+    },
+    "new season": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nieuw seizoen"
+          }
+        }
+      }
+    },
+    "new episode": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nieuwe aflevering"
+          }
+        }
+      }
+    },
+    "%lld new episodes": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld new episode"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld new episodes"
+                }
+              }
+            }
+          }
+        },
+        "nl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld nieuwe aflevering"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld nieuwe afleveringen"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Series · %lld seasons": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Series · %lld season"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Series · %lld seasons"
+                }
+              }
+            }
+          }
+        },
+        "nl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Serie · %lld seizoen"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Serie · %lld seizoenen"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld eps.": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld ep."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld eps."
+                }
+              }
+            }
+          }
+        },
+        "nl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld afl."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld afl."
+                }
+              }
+            }
           }
         }
       }

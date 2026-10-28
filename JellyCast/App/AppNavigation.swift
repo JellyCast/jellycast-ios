@@ -36,7 +36,6 @@ final class AppNavigation {
     var playQueue: PlayQueue?
     var addToListRequest: AddToListRequest?
     var showsSettings = false
-    var librarySortRequest: LibrarySort?
 
     func open(_ route: Route) {
         switch tab {
@@ -71,8 +70,4 @@ final class AppNavigation {
         addToListRequest = AddToListRequest(title: title, itemIDs: itemIDs)
     }
 
-    func showNewInLibrary() {
-        librarySortRequest = .newest
-        tab = .library
-    }
 }

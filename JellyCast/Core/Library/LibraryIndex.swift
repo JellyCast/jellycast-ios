@@ -179,6 +179,20 @@ nonisolated struct LibraryIndex: Sendable {
         return (movies + series).sorted { $0.1 > $1.1 }.map(\.0)
     }
 
+    /// The first episode in air order that came in during the New window.
+    func firstNewEpisode(of seriesID: String, now: Date = .now) -> Episode? {
+        guard let cutoff = Calendar.current.date(byAdding: .day, value: -Self.newWindowDays, to: now) else {
+            return nil
+        }
+        return progressBySeries[seriesID]?.episodes.first { ($0.dateAdded ?? .distantPast) >= cutoff }
+    }
+
+    var notStartedMovies: [Movie] {
+        snapshot.movies
+            .filter { status(of: $0) == .notStarted }
+            .sorted { ($0.dateAdded ?? .distantPast) > ($1.dateAdded ?? .distantPast) }
+    }
+
     var notStartedSeries: [Series] {
         snapshot.series
             .filter { status(of: $0) == .notStarted }

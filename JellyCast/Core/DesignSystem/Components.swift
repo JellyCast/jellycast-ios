@@ -89,30 +89,6 @@ struct PressedOpacityButtonStyle: ButtonStyle {
     }
 }
 
-/// "Volgende  bezig en volgende aflevering", with an optional trailing link.
-struct SectionHeader: View {
-    let title: LocalizedStringKey
-    var subtitle: LocalizedStringKey?
-    var trailing: LocalizedStringKey?
-    var onTrailing: (() -> Void)?
-
-    var body: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 8) {
-            Text(title).font(.title3.bold()).foregroundStyle(JellyCastColors.text).layoutPriority(1)
-            if let subtitle {
-                Text(subtitle).font(.subheadline).foregroundStyle(JellyCastColors.textMuted)
-            }
-            Spacer(minLength: 8)
-            if let trailing, let onTrailing {
-                Button(trailing, action: onTrailing)
-                    .font(.subheadline)
-                    .foregroundStyle(JellyCastColors.accent)
-            }
-        }
-        .lineLimit(1)
-    }
-}
-
 extension View {
     /// Scrolling or tapping outside a text field puts the keyboard away, as in the chat.
     func dismissesKeyboard(_ isFocused: FocusState<Bool>.Binding) -> some View {
@@ -162,22 +138,6 @@ struct WatchProgressBar: View {
     }
 }
 
-/// A small label on an image, like "NIEUW".
-struct ImageBadge: View {
-    let text: LocalizedStringKey
-
-    var body: some View {
-        Text(text)
-            .font(.caption2.weight(.bold))
-            .tracking(0.6)
-            .textCase(.uppercase)
-            .foregroundStyle(JellyCastColors.text)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 3)
-            .background(JellyCastColors.background.opacity(0.72), in: .capsule)
-    }
-}
-
 /// The message in place of content that could not load, with a way to retry.
 struct ContentErrorView: View {
     let message: String
@@ -201,9 +161,7 @@ struct ContentErrorView: View {
         HStack {
             GlassCircleButton(systemImage: "chevron.left", label: "Back") {}
             RailCircleButton(systemImage: "checkmark", label: "Mark as watched") {}
-            ImageBadge(text: "New")
         }
-        SectionHeader(title: "Up next", subtitle: "in progress and next episode", trailing: "All") {}
         ListSectionLabel(text: "Added this week")
         WatchProgressBar(progress: 0.62)
     }
