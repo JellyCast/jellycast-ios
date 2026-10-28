@@ -7,6 +7,7 @@ struct MovieScreen: View {
     let movieID: String
 
     @Environment(AppNavigation.self) private var navigation
+    @Environment(\.layout) private var layout
     @State private var mediaInfo: MediaInfo?
     @State private var topInset: CGFloat = 0
 
@@ -30,9 +31,16 @@ struct MovieScreen: View {
     }
 
     private func content(_ movie: Movie) -> some View {
+        GeometryReader { proxy in
+            let isSplit = layout.isRegular && proxy.size.width > proxy.size.height
+            panel(movie, arrangement: isSplit ? .split : .column)
+        }
+    }
+
+    private func panel(_ movie: Movie, arrangement: InfoPanelArrangement) -> some View {
         ItemInfoPanel(
             playable: .movie(movie), mediaInfo: mediaInfo, store: store, showsTitle: false,
-            tabBarTopClearance: topInset
+            arrangement: arrangement, tabBarTopClearance: topInset
         ) { selected in
             navigation.open(.movie(id: selected.id))
         } header: {
