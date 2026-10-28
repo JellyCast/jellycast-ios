@@ -64,6 +64,27 @@ nonisolated struct RemotePlaybackAttributes: ActivityAttributes {
     let deviceID: String
 }
 
+/// What a tap on the activity opens: the app's now playing screen for that TV.
+nonisolated enum RemotePlaybackLink {
+    static let scheme = "jellycast"
+    private static let host = "tv"
+    private static let deviceKey = "device"
+
+    static func url(deviceID: String) -> URL? {
+        var components = URLComponents()
+        components.scheme = scheme
+        components.host = host
+        components.queryItems = [URLQueryItem(name: deviceKey, value: deviceID)]
+        return components.url
+    }
+
+    static func deviceID(from url: URL) -> String? {
+        guard url.scheme == scheme, url.host() == host else { return nil }
+        return URLComponents(url: url, resolvingAgainstBaseURL: false)?
+            .queryItems?.first { $0.name == deviceKey }?.value
+    }
+}
+
 /// The App Group container both targets can read: a Live Activity can't load from the network.
 nonisolated enum RemotePlaybackArtworkFiles {
     static let appGroup = "group.nl.jellycast.ios"

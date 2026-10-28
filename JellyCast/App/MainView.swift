@@ -15,6 +15,7 @@ struct MainView: View {
     @State private var hasBeenActive = false
     /// Set while this open still waits to decide on the now playing screen of a TV.
     @State private var openedAt: ContinuousClock.Instant?
+    @State private var requestedTVDeviceID: String?
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.layout) private var layout
     @Environment(\.isSplashShowing) private var isSplashShowing
@@ -128,7 +129,16 @@ struct MainView: View {
         .onChange(of: scenePhase) { _, phase in
             if phase == .active { nowPlaying.pip.stopIfActive() }
         }
-        .onChange(of: remote.answeredAt) { showTVNowPlayingAtOpen() }
+        .onChange(of: remote.answeredAt) {
+            showTVNowPlayingAtOpen()
+            showRequestedTV()
+        }
+        .onOpenURL { url in
+            guard let deviceID = RemotePlaybackLink.deviceID(from: url) else { return }
+            requestedTVDeviceID = deviceID
+            openedAt = nil
+            showRequestedTV()
+        }
         .onChange(of: isSplashShowing) { showTVNowPlayingAtOpen() }
         .alert(
             nowPlaying.startError ?? "",
@@ -216,6 +226,15 @@ private extension MainView {
             return
         }
         await store.checkServer()
+    }
+
+    /// A tap on the Live Activity: that TV's now playing screen, once the sessions are known.
+    func showRequestedTV() {
+        guard let deviceID = requestedTVDeviceID, remote.answeredAt != nil else { return }
+        requestedTVDeviceID = nil
+        if let session = remote.sessions.first(where: { $0.deviceID == deviceID }) ?? remote.current {
+            remote.show(session)
+        }
     }
 
     /// Waits for the first answer after opening and for the splash, then decides once.

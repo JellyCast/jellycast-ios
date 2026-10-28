@@ -10,6 +10,7 @@ struct RemotePlaybackLiveActivity: Widget {
             // Clear, so the lock screen's own glass shows through, as with the system's players.
             LockScreenView(state: context.state, isStale: context.isStale)
                 .activityBackgroundTint(.clear)
+                .widgetURL(RemotePlaybackLink.url(deviceID: context.attributes.deviceID))
         } dynamicIsland: { context in
             let state = context.state
             let isStale = context.isStale
@@ -40,6 +41,7 @@ struct RemotePlaybackLiveActivity: Widget {
                 ProgressRing(state: state, isStale: isStale)
             }
             .keylineTint(JellyCastColors.accent)
+            .widgetURL(RemotePlaybackLink.url(deviceID: context.attributes.deviceID))
         }
     }
 
