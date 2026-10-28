@@ -19,6 +19,9 @@ struct ItemInfoPanel<Header: View, Actions: View>: View {
     var arrangement = InfoPanelArrangement.column
     /// What the panel sits on; the chat input covers the content scrolling under it with it.
     var surface = JellyCastColors.background
+    /// The chosen tab and the chat, when they must outlive this panel: the player rebuilds it
+    /// when the device turns.
+    var memory: InfoPanelMemory?
     /// Set while a TV plays it, so the episode list says where.
     var playingOn: String?
     /// Room to keep free above the tab bar when a tab scrolls it up, where the panel runs under
@@ -36,8 +39,7 @@ struct ItemInfoPanel<Header: View, Actions: View>: View {
 
     @Environment(\.layout) private var layout
     @State private var extras: ItemExtras?
-    @State private var selectedTab: InfoTab?
-    @State private var chat = ChatModel()
+    @State private var ownMemory = InfoPanelMemory()
     @FocusState private var isChatFocused: Bool
     @State private var viewportHeight: CGFloat = 0
     @State private var tabBarY: CGFloat = 0
@@ -78,7 +80,6 @@ struct ItemInfoPanel<Header: View, Actions: View>: View {
                 VStack(alignment: .leading, spacing: 22) {
                     summary.frame(maxWidth: layout.textMaxWidth, alignment: .leading)
                     InfoTabBar(tabs: tabs, selection: scrollingTabSelection)
-                        .frame(maxWidth: layout.textMaxWidth)
                         .padding(.top, 6)
                         .onGeometryChange(for: CGFloat.self) {
                             $0.frame(in: .named(Self.contentSpace)).minY
@@ -108,8 +109,8 @@ struct ItemInfoPanel<Header: View, Actions: View>: View {
         }
         .dismissesKeyboard($isChatFocused)
         .safeAreaInset(edge: .bottom) { chatInput(margin: layout.margin) }
-        .onChange(of: chat.messages.count) { scrollsToChatEnd = true }
-        .onChange(of: chat.steps.count) { scrollsToChatEnd = true }
+        .onChange(of: kept.chat.messages.count) { scrollsToChatEnd = true }
+        .onChange(of: kept.chat.steps.count) { scrollsToChatEnd = true }
         .onChange(of: chatEndY) { scrollColumnToChatEnd() }
         .onChange(of: scrollToTopRequest) {
             withAnimation(.smooth(duration: 0.4)) { scrollPosition.scrollTo(edge: .top) }
@@ -163,8 +164,8 @@ struct ItemInfoPanel<Header: View, Actions: View>: View {
                         }
                         .scrollIndicators(.hidden)
                         .dismissesKeyboard($isChatFocused)
-                        .onChange(of: chat.messages.count) { scrollToChatEnd(scroll) }
-                        .onChange(of: chat.steps.count) { scrollToChatEnd(scroll) }
+                        .onChange(of: kept.chat.messages.count) { scrollToChatEnd(scroll) }
+                        .onChange(of: kept.chat.steps.count) { scrollToChatEnd(scroll) }
                     }
                     .safeAreaInset(edge: .bottom) { chatInput(margin: Self.splitTrailingPadding) }
                 }
@@ -184,13 +185,15 @@ struct ItemInfoPanel<Header: View, Actions: View>: View {
         InfoTab.available(for: playable, chatEnabled: ChatSettings.shared.hasKey)
     }
 
+    private var kept: InfoPanelMemory { memory ?? ownMemory }
+
     private var currentTab: InfoTab {
-        if let selectedTab, tabs.contains(selectedTab) { return selectedTab }
+        if let selected = kept.selectedTab, tabs.contains(selected) { return selected }
         return tabs.first ?? .cast
     }
 
     private var tabSelection: Binding<InfoTab> {
-        Binding { currentTab } set: { selectedTab = $0 }
+        Binding { currentTab } set: { kept.selectedTab = $0 }
     }
 
     /// Tall enough that the tab bar can scroll up to the top, also above the chat's question field.
@@ -202,7 +205,7 @@ struct ItemInfoPanel<Header: View, Actions: View>: View {
     /// Choosing a tab scrolls the bar up to just under the video or image, so the tab has room.
     private var scrollingTabSelection: Binding<InfoTab> {
         Binding { currentTab } set: { tab in
-            selectedTab = tab
+            kept.selectedTab = tab
             let target = max(0, tabBarY - tabBarTopClearance)
             withAnimation(.easeInOut(duration: 0.25)) { scrollPosition.scrollTo(y: target) }
         }
@@ -232,28 +235,26 @@ struct ItemInfoPanel<Header: View, Actions: View>: View {
                 }
             }
         case .cast:
-            CastTab(playable: playable, store: store, wholeSeries: showsWholeSeries).frame(maxWidth: layout.textMaxWidth, alignment: .leading)
+            CastTab(playable: playable, store: store, wholeSeries: showsWholeSeries)
         case .related:
             if case .movie(let movie) = playable { relatedTab(movie) }
         case .chat:
             VStack(alignment: .leading, spacing: 0) {
-                ChatTab(playable: playable, store: store, model: chat)
+                ChatTab(playable: playable, store: store, model: kept.chat)
                 Color.clear.frame(height: 1).id(Self.chatEndID)
                     .onGeometryChange(for: CGFloat.self) {
                         $0.frame(in: .named(Self.contentSpace)).maxY
                     } action: { chatEndY = $0 }
             }
-            .frame(maxWidth: layout.textMaxWidth, alignment: .leading)
         }
     }
 
     @ViewBuilder
     private func chatInput(margin: CGFloat) -> some View {
         if currentTab == .chat {
-            ChatInputBar(title: title, isSending: chat.isSending, isFocused: $isChatFocused) { question in
-                chat.send(question, about: playable, store: store)
+            ChatInputBar(title: title, isSending: kept.chat.isSending, isFocused: $isChatFocused) { question in
+                kept.chat.send(question, about: playable, store: store)
             }
-            .frame(maxWidth: layout.textMaxWidth)
             .padding(.horizontal, margin)
             .padding(.vertical, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -431,4 +432,11 @@ extension ItemInfoPanel where Header == EmptyView, Actions == EmptyView {
             EmptyView()
         }
     }
+}
+
+/// What an info panel keeps while its screen is open: the chosen tab and the chat.
+@Observable
+final class InfoPanelMemory {
+    var selectedTab: InfoTab?
+    let chat = ChatModel()
 }

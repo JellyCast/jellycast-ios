@@ -19,6 +19,7 @@ struct PlayerScreen: View {
     @State private var sheet: PlayerSheet?
     @Environment(RemoteSessions.self) private var remote: RemoteSessions?
     @Environment(\.layout) private var layout
+    @State private var panelMemory = InfoPanelMemory()
 
     private static let controlsTimeout = Duration.seconds(3)
     private static let videoAspectRatio: CGFloat = 16 / 9
@@ -98,7 +99,7 @@ struct PlayerScreen: View {
     ) -> some View {
         ItemInfoPanel(
             playable: session.playable, mediaInfo: session.mediaInfo, store: store, arrangement: arrangement,
-            surface: arrangement == .split ? .black : JellyCastColors.background
+            surface: arrangement == .split ? .black : JellyCastColors.background, memory: panelMemory
         ) { next in
             nowPlaying.play(next, store: store)
         } header: {
