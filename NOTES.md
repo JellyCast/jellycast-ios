@@ -35,6 +35,16 @@ The user checks battery use over a full film, PiP and AirPlay on the iPhone.
 
 ## Decisions
 
+### Usage statistics and ads from the JellyCast service (2026-10-29)
+
+- **Why:** JellyCast is to become free, paid for by ads chosen by country only. Research, rules and design: `../RECLAME-EN-METING.md`; the service: `../jellycast-api`.
+- First launch (and every launch until answered) asks first whether JellyCast may count this device (`UsageConsentScreen`), before the app itself appears so nothing it presents can cover the question. Both answers look the same; the app works the same either way. Settings → Privacy changes it later.
+- Allowed: a random install ID in UserDefaults, and `POST /v1/ping` with that ID and the platform (`ios` or `ipados`) at launch and on coming back, at most once an hour. Declined or turned off: the ID is deleted and nothing is sent. Changing what is sent means raising `UsageStatistics.consentVersion`, which asks everyone again.
+- Ads need no consent: `GET /v1/placements` at launch and on coming back (at most every 15 minutes), kept in UserDefaults so Home shows the tile without waiting. A `home` campaign becomes a tile marked Ad at its position on Home (never the featured first tile); a tap opens what it is, a link and why ("your country"). Nothing else in the app shows ads. `splash` is parsed but not shown.
+- The service is the test server on the Windows Jellyfin machine (`192.168.1.4:8090`, then `10.8.0.1:8090` over the VPN) until it has a public address. `-serviceAddress <url>` at launch points a test build elsewhere, e.g. a test server on the Mac for the simulator.
+- Checked in the iPad Pro simulator against a local test server: the question, a ping after Allow, the ad tile at position 3 straight from the cache on the next launch, its sheet, and turning statistics off in Settings (ID deleted). Installed on the iPhone 18 Pro Max and the iPad (the iPhone 14 was unreachable); not checked there yet.
+- Not built yet: "Report ad" (Apple requires it before the App Store), the splash placement, counting impressions and taps.
+
 ### One server, several addresses, picked by the user's order (2026-10-29)
 
 - **Why:** the user's server is reached on the LAN at home and on another IP over a VPN away from home. The VPN is reachable at home too, but at home the LAN address is wanted. So the first address in the user's order that answers wins, not the last used one.

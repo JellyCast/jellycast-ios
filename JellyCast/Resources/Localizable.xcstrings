@@ -3936,6 +3936,196 @@
           }
         }
       }
+    },
+    "Help keep JellyCast free": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Help JellyCast gratis te houden"
+          }
+        }
+      }
+    },
+    "JellyCast is free. To find advertisers, we'd like to count how many devices use the app in each country.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "JellyCast is gratis. Om adverteerders te vinden, willen we tellen hoeveel apparaten de app per land gebruiken."
+          }
+        }
+      }
+    },
+    "When you open the app, it sends a random number made for this app, your country and the hour. Not your name, your server or what you watch.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Als je de app opent, stuurt hij een willekeurig nummer dat alleen voor deze app is gemaakt, je land en het uur. Niet je naam, je server of wat je kijkt."
+          }
+        }
+      }
+    },
+    "The country comes from your internet address, which is never stored.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het land komt uit je internetadres, en dat adres wordt nooit bewaard."
+          }
+        }
+      }
+    },
+    "Advertisers only see totals per country. The details are deleted after 13 months.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adverteerders zien alleen totalen per land. De details worden na 13 maanden verwijderd."
+          }
+        }
+      }
+    },
+    "JellyCast may show an ad now and then, chosen only by your country. That doesn't depend on what you choose here.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "JellyCast kan af en toe een advertentie tonen, alleen gekozen op je land. Dat staat los van wat je hier kiest."
+          }
+        }
+      }
+    },
+    "You can change this any time in Settings.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je kunt dit altijd wijzigen in Instellingen."
+          }
+        }
+      }
+    },
+    "Don't allow": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niet toestaan"
+          }
+        }
+      }
+    },
+    "Allow": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toestaan"
+          }
+        }
+      }
+    },
+    "Anonymous usage statistics": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anonieme gebruiksstatistiek"
+          }
+        }
+      }
+    },
+    "What is sent": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wat er wordt verstuurd"
+          }
+        }
+      }
+    },
+    "Usage statistics": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gebruiksstatistiek"
+          }
+        }
+      }
+    },
+    "Privacy": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacy"
+          }
+        }
+      }
+    },
+    "Counts this device per country, so JellyCast can find advertisers and stay free.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telt dit apparaat per land, zodat JellyCast adverteerders kan vinden en gratis blijft."
+          }
+        }
+      }
+    },
+    "Ad": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Advertentie"
+          }
+        }
+      }
+    },
+    "Visit website": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naar de website"
+          }
+        }
+      }
+    },
+    "Why am I seeing this?": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waarom zie ik dit?"
+          }
+        }
+      }
+    },
+    "JellyCast chooses ads by country only, never by what you watch.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "JellyCast kiest advertenties alleen op land, nooit op wat je kijkt."
+          }
+        }
+      }
+    },
+    "JellyCast chooses ads by country only, never by what you watch. You see this one because you're in %@.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "JellyCast kiest advertenties alleen op land, nooit op wat je kijkt. Je ziet deze omdat je in %@ bent."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

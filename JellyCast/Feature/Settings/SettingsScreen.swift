@@ -49,6 +49,7 @@ struct SettingsScreen: View {
                 AudioDelaySettingsSection(delay: AudioOutputDelay.shared)
                 DownloadSettingsSection(settings: DownloadSettings.shared)
                 RatingSettingsSection(settings: RatingSettings.shared)
+                UsageStatisticsSection(statistics: UsageStatistics.shared)
                 Section {
                     NavigationLink {
                         AIChatSettingsScreen(settings: ChatSettings.shared)
@@ -89,6 +90,27 @@ struct SettingsScreen: View {
 
     private static func milliseconds(_ duration: Duration) -> String {
         "\(Int(duration / .milliseconds(1))) ms"
+    }
+}
+
+private struct UsageStatisticsSection: View {
+    @Bindable var statistics: UsageStatistics
+
+    var body: some View {
+        Section {
+            Toggle("Anonymous usage statistics", isOn: $statistics.isAllowed)
+            NavigationLink("What is sent") {
+                ScrollView {
+                    UsageStatisticsDetails().padding(24)
+                }
+                .background(JellyCastColors.background)
+                .navigationTitle("Usage statistics")
+            }
+        } header: {
+            Text("Privacy")
+        } footer: {
+            Text("Counts this device per country, so JellyCast can find advertisers and stay free.")
+        }
     }
 }
 

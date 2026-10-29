@@ -25,12 +25,20 @@ enum AppLaunch {
 struct RootView: View {
     @State private var app = AppModel()
     @State private var showsSplash = true
+    @State private var usage = UsageStatistics.shared
+    @Environment(\.scenePhase) private var scenePhase
 
     private static let splashFadeOut = 0.2
 
     var body: some View {
         ZStack {
-            if let library = app.library {
+            // Asked before the app itself appears, so nothing it presents can cover the question.
+            if usage.needsChoice {
+                UsageConsentScreen { choice in
+                    withAnimation(.easeOut(duration: Self.splashFadeOut)) { usage.choose(choice) }
+                }
+                .transition(.opacity)
+            } else if let library = app.library {
                 MainView(store: library) { app.signOut() }
                     .id(library.session.accessToken)
                     .environment(\.isSplashShowing, showsSplash)
@@ -49,6 +57,12 @@ struct RootView: View {
             }
         }
         .background(JellyCastColors.background)
+        .task(id: scenePhase == .active) {
+            guard scenePhase == .active else { return }
+            async let ping: Void = usage.appOpened()
+            async let ads: Void = AdPlacements.shared.refresh()
+            _ = await (ping, ads)
+        }
     }
 }
 

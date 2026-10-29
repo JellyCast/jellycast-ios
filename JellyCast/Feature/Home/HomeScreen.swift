@@ -58,8 +58,14 @@ struct HomeScreen: View {
         RefreshableScrollView(padsSafeAreaTop: true) {
             await store.refresh()
         } content: {
-            HomeGrid(items: feed, metrics: metrics) { item, size, style in
-                HomeTile(item: item, index: index, size: size, style: style)
+            let ads = AdPlacements.shared
+            HomeGrid(items: feed.entries(with: ads.home), metrics: metrics) { entry, size, style in
+                switch entry {
+                case .media(let item):
+                    HomeTile(item: item, index: index, size: size, style: style)
+                case .ad(let campaign):
+                    HomeAdTile(campaign: campaign, country: ads.country, size: size, style: style)
+                }
             } featuredOverlay: {
                 if !layout.isRegular { profileButton.padding(Self.profileInset) }
             }
