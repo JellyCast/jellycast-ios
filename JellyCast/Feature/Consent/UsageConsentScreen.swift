@@ -16,7 +16,7 @@ struct UsageConsentScreen: View {
                 VStack(alignment: .leading, spacing: 20) {
                     BrandMark(drawProgress: 1)
                         .frame(width: Self.markSize, height: Self.markSize)
-                    Text("Help keep JellyCast free")
+                    Text("Statistics")
                         .font(.title.bold())
                         .foregroundStyle(JellyCastColors.text)
                     Text("We count how many devices use JellyCast, per country. Without your name or what you watch.")

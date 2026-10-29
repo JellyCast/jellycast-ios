@@ -3937,16 +3937,6 @@
         }
       }
     },
-    "Help keep JellyCast free": {
-      "localizations": {
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Help JellyCast gratis te houden"
-          }
-        }
-      }
-    },
     "When you open the app, it sends a random number made for this app, your country and the hour. Not your name, your server or what you watch.": {
       "localizations": {
         "nl": {
@@ -4123,6 +4113,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verder zonder statistiek"
+          }
+        }
+      }
+    },
+    "Statistics": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Statistiek"
           }
         }
       }
