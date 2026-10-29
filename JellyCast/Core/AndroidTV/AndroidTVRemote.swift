@@ -106,7 +106,7 @@ nonisolated enum AndroidTVRemote {
             try await send(channel) { $0.message(Field.configure) { configure in
                 configure.varint(1, features)
                 configure.message(2) { info in
-                    info.string(1, "iPhone")
+                    info.string(1, SessionStorage.deviceName)
                     info.string(2, "Apple")
                     info.varint(3, 1)
                     info.string(4, "1")

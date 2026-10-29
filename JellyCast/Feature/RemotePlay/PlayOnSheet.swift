@@ -68,7 +68,7 @@ struct PlayOnSheet: View {
                 }
                 ForEach(tvsToPairAgain) { tv in
                     row(
-                        title: tv.name, detail: String(localized: "Pair again to turn it on from this iPhone"),
+                        title: tv.name, detail: String(localized: "Pair again to turn it on from this \(UIDevice.current.localizedModel)"),
                         systemImage: "tv", isAccented: false
                     ) {
                         pairingTarget = PairingTarget(tv)
@@ -76,7 +76,11 @@ struct PlayOnSheet: View {
                     .contextMenu { menu(deviceID: tv.deviceID, name: tv.name) }
                 }
                 if let onPlayHere {
-                    row(title: String(localized: "This iPhone"), detail: nil, systemImage: "iphone", isAccented: false) {
+                    row(
+                        title: String(localized: "This \(UIDevice.current.localizedModel)"), detail: nil,
+                        systemImage: UIDevice.current.userInterfaceIdiom == .pad ? "ipad" : "iphone",
+                        isAccented: false
+                    ) {
                         dismiss()
                         onPlayHere()
                     }
@@ -121,7 +125,7 @@ struct PlayOnSheet: View {
             }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("The name is only used on this iPhone.")
+            Text("The name is only used on this \(UIDevice.current.localizedModel).")
         }
     }
 

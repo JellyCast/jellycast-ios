@@ -185,7 +185,7 @@ private struct StreamingQualitySection: View {
             Text("Streaming quality")
         } footer: {
             Text("""
-                Local network is when the server is on the same network as this iPhone. \
+                Local network is when the server is on the same network as this \(UIDevice.current.localizedModel). \
                 Auto measures the connection when playback starts and picks the highest quality \
                 that keeps up. Below Original the server converts the video, in SDR.
                 """)

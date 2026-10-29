@@ -2,6 +2,7 @@ import AVFoundation
 import AetherEngine
 import Foundation
 import OSLog
+import UIKit
 
 /// One play of one item: loads it, reports it, and knows its segments and what plays next.
 @Observable
@@ -291,7 +292,7 @@ final class PlayerSession {
         switch error {
         case let jellyfin as JellyfinError: jellyfin.localizedDescription
         case let url as URLError: JellyfinError.unreachable(url).localizedDescription
-        default: String(localized: "This file doesn't play on this iPhone.")
+        default: String(localized: "This file doesn't play on this \(UIDevice.current.localizedModel).")
         }
     }
 

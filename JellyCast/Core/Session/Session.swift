@@ -25,6 +25,22 @@ nonisolated enum SessionStorage {
         return created
     }
 
+    /// The kind of device, as the server and the TVs show it. `UIDevice` is main-actor only, and
+    /// the client builds its header off the main actor.
+    static let deviceName: String = {
+        if ProcessInfo.processInfo.isiOSAppOnMac { return "Mac" }
+        let model = ProcessInfo.processInfo.environment["SIMULATOR_MODEL_IDENTIFIER"] ?? hardwareModel
+        return model.hasPrefix("iPad") ? "iPad" : "iPhone"
+    }()
+
+    private static var hardwareModel: String {
+        var size = 0
+        sysctlbyname("hw.machine", nil, &size, nil, 0)
+        var machine = [CChar](repeating: 0, count: size)
+        sysctlbyname("hw.machine", &machine, &size, nil, 0)
+        return String(cString: machine)
+    }
+
     static var lastServerAddress: String? {
         get { UserDefaults.standard.string(forKey: lastServerAddressKey) }
         set { UserDefaults.standard.set(newValue, forKey: lastServerAddressKey) }

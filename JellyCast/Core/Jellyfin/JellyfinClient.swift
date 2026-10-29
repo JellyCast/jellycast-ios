@@ -60,7 +60,7 @@ nonisolated struct JellyfinClient: Sendable {
     var authorizationHeader: String {
         var fields = [
             "Client=\"\(Self.clientName)\"",
-            "Device=\"iPhone\"",
+            "Device=\"\(SessionStorage.deviceName)\"",
             "DeviceId=\"\(deviceID)\"",
             "Version=\"\(Self.clientVersion)\"",
         ]

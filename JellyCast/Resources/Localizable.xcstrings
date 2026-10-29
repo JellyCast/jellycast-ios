@@ -1487,12 +1487,12 @@
         }
       }
     },
-    "This file doesn't play on this iPhone.": {
+    "This file doesn't play on this %@.": {
       "localizations": {
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dit bestand speelt niet af op deze iPhone."
+            "value": "Dit bestand speelt niet af op deze %@."
           }
         }
       }
@@ -1557,12 +1557,12 @@
         }
       }
     },
-    "Local network is when the server is on the same network as this iPhone. Auto measures the connection when playback starts and picks the highest quality that keeps up. Below Original the server converts the video, in SDR.": {
+    "Local network is when the server is on the same network as this %@. Auto measures the connection when playback starts and picks the highest quality that keeps up. Below Original the server converts the video, in SDR.": {
       "localizations": {
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lokaal netwerk is wanneer de server op hetzelfde netwerk zit als deze iPhone. Auto meet de verbinding bij het starten en kiest de hoogste kwaliteit die bijblijft. Onder Origineel zet de server de video om, in SDR."
+            "value": "Lokaal netwerk is wanneer de server op hetzelfde netwerk zit als deze %@. Auto meet de verbinding bij het starten en kiest de hoogste kwaliteit die bijblijft. Onder Origineel zet de server de video om, in SDR."
           }
         }
       }
@@ -1737,12 +1737,12 @@
         }
       }
     },
-    "This iPhone": {
+    "This %@": {
       "localizations": {
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deze iPhone"
+            "value": "Deze %@"
           }
         }
       }
@@ -1787,12 +1787,12 @@
         }
       }
     },
-    "The name is only used on this iPhone.": {
+    "The name is only used on this %@.": {
       "localizations": {
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "De naam geldt alleen op deze iPhone."
+            "value": "De naam geldt alleen op deze %@."
           }
         }
       }
@@ -1847,12 +1847,12 @@
         }
       }
     },
-    "Pair again to turn it on from this iPhone": {
+    "Pair again to turn it on from this %@": {
       "localizations": {
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Koppel opnieuw om hem vanaf deze iPhone aan te zetten"
+            "value": "Koppel opnieuw om hem vanaf deze %@ aan te zetten"
           }
         }
       }
