@@ -3947,16 +3947,6 @@
         }
       }
     },
-    "JellyCast is free. To find advertisers, we'd like to count how many devices use the app in each country.": {
-      "localizations": {
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "JellyCast is gratis. Om adverteerders te vinden, willen we tellen hoeveel apparaten de app per land gebruiken."
-          }
-        }
-      }
-    },
     "When you open the app, it sends a random number made for this app, your country and the hour. Not your name, your server or what you watch.": {
       "localizations": {
         "nl": {
@@ -3987,42 +3977,12 @@
         }
       }
     },
-    "JellyCast may show an ad now and then, chosen only by your country. That doesn't depend on what you choose here.": {
-      "localizations": {
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "JellyCast kan af en toe een advertentie tonen, alleen gekozen op je land. Dat staat los van wat je hier kiest."
-          }
-        }
-      }
-    },
     "You can change this any time in Settings.": {
       "localizations": {
         "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "Je kunt dit altijd wijzigen in Instellingen."
-          }
-        }
-      }
-    },
-    "Don't allow": {
-      "localizations": {
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Niet toestaan"
-          }
-        }
-      }
-    },
-    "Allow": {
-      "localizations": {
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Toestaan"
           }
         }
       }
@@ -4133,6 +4093,36 @@
           "stringUnit": {
             "state": "translated",
             "value": "Voor ondersteuning stuurt hij ook het soort toestel, de systeemversie en de app-versie mee, zoals \"iPhone 17, iOS 26, JellyCast 1.0\". Niet de naam van je toestel."
+          }
+        }
+      }
+    },
+    "We count how many devices use JellyCast, per country. Without your name or what you watch.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We tellen hoeveel toestellen JellyCast gebruiken, per land. Zonder je naam of wat je kijkt."
+          }
+        }
+      }
+    },
+    "More information": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meer informatie"
+          }
+        }
+      }
+    },
+    "Continue without statistics": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verder zonder statistiek"
           }
         }
       }

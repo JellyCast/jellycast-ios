@@ -1,9 +1,11 @@
 import SwiftUI
 
-/// Asked once, before anything else: may JellyCast count this device? Both answers are the same
-/// size and weight, and the app works the same either way.
+/// Asked once, before anything else: may JellyCast count this device? Continuing allows it;
+/// declining is one tap on the same screen, and the app works the same either way.
 struct UsageConsentScreen: View {
     let onChoose: (UsageStatistics.Choice) -> Void
+
+    @State private var showsDetails = false
 
     private static let maxWidth: CGFloat = 520
     private static let markSize: CGFloat = 56
@@ -17,12 +19,9 @@ struct UsageConsentScreen: View {
                     Text("Help keep JellyCast free")
                         .font(.title.bold())
                         .foregroundStyle(JellyCastColors.text)
-                    Text("""
-                        JellyCast is free. To find advertisers, we'd like to count how many devices \
-                        use the app in each country.
-                        """)
+                    Text("We count how many devices use JellyCast, per country. Without your name or what you watch.")
                         .foregroundStyle(JellyCastColors.text)
-                    UsageStatisticsDetails()
+                    moreInformation
                 }
                 .frame(maxWidth: Self.maxWidth, alignment: .leading)
                 .padding(.horizontal, 24)
@@ -30,15 +29,39 @@ struct UsageConsentScreen: View {
                 .frame(maxWidth: .infinity)
             }
             .scrollBounceBehavior(.basedOnSize)
-            HStack(spacing: 12) {
-                ChoiceButton(title: "Don't allow") { onChoose(.declined) }
-                ChoiceButton(title: "Allow") { onChoose(.allowed) }
+            VStack(spacing: 4) {
+                ContinueButton { onChoose(.allowed) }
+                Button("Continue without statistics") { onChoose(.declined) }
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(JellyCastColors.textMuted)
+                    .frame(minHeight: 44)
             }
             .frame(maxWidth: Self.maxWidth)
             .padding(.horizontal, 24)
-            .padding(.bottom, 16)
+            .padding(.bottom, 12)
         }
         .background(JellyCastColors.background)
+    }
+
+    private var moreInformation: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Button {
+                withAnimation(.easeOut(duration: 0.2)) { showsDetails.toggle() }
+            } label: {
+                HStack(spacing: 6) {
+                    Text("More information")
+                    Image(systemName: "chevron.down")
+                        .font(.footnote.weight(.semibold))
+                        .rotationEffect(.degrees(showsDetails ? 180 : 0))
+                }
+                .font(.subheadline.weight(.medium))
+                .foregroundStyle(JellyCastColors.accent)
+            }
+            .buttonStyle(PressedOpacityButtonStyle())
+            if showsDetails {
+                UsageStatisticsDetails().transition(.opacity)
+            }
+        }
     }
 }
 
@@ -59,10 +82,6 @@ struct UsageStatisticsDetails: View {
                 """)
             Point(systemImage: "chart.bar", text: """
                 Advertisers only see totals per country. The details are deleted after 13 months.
-                """)
-            Point(systemImage: "rectangle.on.rectangle", text: """
-                JellyCast may show an ad now and then, chosen only by your country. That doesn't \
-                depend on what you choose here.
                 """)
             Point(systemImage: "gearshape", text: "You can change this any time in Settings.")
         }
@@ -88,20 +107,18 @@ struct UsageStatisticsDetails: View {
     }
 }
 
-private struct ChoiceButton: View {
-    let title: LocalizedStringKey
+private struct ContinueButton: View {
     let action: () -> Void
 
     private static let height: CGFloat = 52
 
     var body: some View {
         Button(action: action) {
-            Text(title)
-                .font(.headline)
-                .foregroundStyle(JellyCastColors.text)
-                .lineLimit(1)
+            Text("Continue")
+                .font(.headline.weight(.bold))
+                .foregroundStyle(JellyCastColors.onAccent)
                 .frame(maxWidth: .infinity, minHeight: Self.height)
-                .background(JellyCastColors.rail, in: .capsule)
+                .background(JellyCastColors.accent, in: .capsule)
                 .contentShape(.capsule)
         }
         .buttonStyle(PressedOpacityButtonStyle())
