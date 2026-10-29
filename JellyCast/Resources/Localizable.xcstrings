@@ -3957,16 +3957,6 @@
         }
       }
     },
-    "Advertisers only see totals per country. The details are deleted after 13 months.": {
-      "localizations": {
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Adverteerders zien alleen totalen per land. De details worden na 13 maanden verwijderd."
-          }
-        }
-      }
-    },
     "You can change this any time in Settings.": {
       "localizations": {
         "nl": {
@@ -4123,6 +4113,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Statistiek"
+          }
+        }
+      }
+    },
+    "The details are deleted after 13 months.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De gegevens worden na 13 maanden verwijderd."
           }
         }
       }

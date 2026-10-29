@@ -80,9 +80,7 @@ struct UsageStatisticsDetails: View {
             Point(systemImage: "globe.europe.africa", text: """
                 The country comes from your internet address, which is never stored.
                 """)
-            Point(systemImage: "chart.bar", text: """
-                Advertisers only see totals per country. The details are deleted after 13 months.
-                """)
+            Point(systemImage: "clock", text: "The details are deleted after 13 months.")
             Point(systemImage: "gearshape", text: "You can change this any time in Settings.")
         }
     }
