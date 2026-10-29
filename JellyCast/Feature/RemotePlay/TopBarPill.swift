@@ -67,11 +67,13 @@ private struct TVPill: View {
                             .lineLimit(1)
                             .frame(maxWidth: Self.titleMaxWidth, alignment: .leading)
                             .fixedSize(horizontal: true, vertical: false)
+                            // Under the title only: across the still it ran into the
+                            // capsule's rounded ends.
+                            .overlay(alignment: .bottom) {
+                                WatchProgressBar(progress: progress, height: 2).offset(y: 6)
+                            }
                     }
                     .padding(.trailing, 4)
-                    .overlay(alignment: .bottom) {
-                        WatchProgressBar(progress: progress, height: 2).offset(y: 6)
-                    }
                 } else {
                     still(width: Self.ringSize - 6, height: Self.ringSize - 6)
                         .padding(3)
