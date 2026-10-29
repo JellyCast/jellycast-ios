@@ -1,7 +1,7 @@
 import Foundation
 import OSLog
 
-enum ServerProblem {
+nonisolated enum ServerProblem: Sendable {
     case offline
     case unreachable
 }
@@ -32,7 +32,9 @@ final class LibraryStore {
     /// succeeds. Offline, only downloads can be opened.
     private(set) var isServerUnreachable = false
 
-    let session: Session
+    private(set) var session: Session
+    /// Where the server answers, in the order the user prefers them.
+    private(set) var addresses: [URL]
     let reporter: PlaybackReporter
 
     private static let logger = Logger(subsystem: "nl.jellycast.ios", category: "library")
@@ -43,6 +45,8 @@ final class LibraryStore {
     init(session: Session, snapshot: LibrarySnapshot? = nil) {
         self.session = session
         self.snapshot = snapshot
+        addresses = ServerAddressBook.addresses(serverID: session.serverID, signedInAt: session.serverURL)
+        ActiveServerAddress.set(session.serverURL)
         reporter = PlaybackReporter(client: session.client, userID: session.userID)
         index = snapshot.map(LibraryIndex.init)
     }
@@ -95,20 +99,36 @@ final class LibraryStore {
             return .unreachable
         }
         #endif
-        do {
-            _ = try await session.client.publicInfo(timeout: Self.serverCheckTimeoutSeconds)
+        let outcome = await ServerAddressPicker.pick(
+            addresses, serverID: session.serverID, timeoutSeconds: Self.serverCheckTimeoutSeconds
+        )
+        switch outcome {
+        case .reached(let address):
+            use(address)
             serverProblem = nil
             isServerUnreachable = false
             Task { await sendOfflineProgress() }
-        } catch let error as JellyfinError {
-            if case .unreachable(let reason) = error {
-                isServerUnreachable = true
-                let problem: ServerProblem = reason.code == .notConnectedToInternet ? .offline : .unreachable
-                if reportsProblem { serverProblem = problem }
-                return problem
-            }
-        } catch {}
-        return nil
+            return nil
+        case .failed(let problem):
+            isServerUnreachable = true
+            if reportsProblem { serverProblem = problem }
+            return problem
+        }
+    }
+
+    /// Switches every client of the session to `address`, including the ones screens keep.
+    func use(_ address: URL) {
+        guard address != session.serverURL else { return }
+        Self.logger.info("Server address switched")
+        session = session.using(address)
+        ActiveServerAddress.set(address)
+        SessionStorage.save(session)
+        DownloadStore.shared.serverAddressChanged()
+    }
+
+    func setAddresses(_ updated: [URL]) {
+        addresses = updated
+        ServerAddressBook.save(updated, serverID: session.serverID)
     }
 
     /// Positions watched in downloads without the server; the library is reloaded when any changed.

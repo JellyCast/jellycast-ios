@@ -80,6 +80,16 @@ nonisolated enum SessionStorage {
 
 extension Session {
     nonisolated var client: JellyfinClient {
-        JellyfinClient(serverURL: serverURL, deviceID: SessionStorage.deviceID, accessToken: accessToken)
+        JellyfinClient(
+            serverURL: serverURL, deviceID: SessionStorage.deviceID, accessToken: accessToken,
+            followsActiveAddress: true
+        )
+    }
+
+    nonisolated func using(_ address: URL) -> Session {
+        Session(
+            serverURL: address, serverID: serverID, serverName: serverName,
+            userID: userID, userName: userName, accessToken: accessToken
+        )
     }
 }

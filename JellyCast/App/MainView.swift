@@ -83,6 +83,9 @@ struct MainView: View {
         .remotePlaybackActivity(remote, client: store.session.client, yieldsTo: nowPlaying.session != nil)
         .task { await store.start() }
         .task { await checkServerAtStart() }
+        .onChange(of: NetworkMonitor.shared.isCellular) {
+            Task { await store.checkServer(reportsProblem: false) }
+        }
         .task(id: store.index == nil) {
             guard store.index != nil else { return }
             await DownloadStore.shared.start(library: store)

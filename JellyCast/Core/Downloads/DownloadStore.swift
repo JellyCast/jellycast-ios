@@ -64,6 +64,12 @@ final class DownloadStore {
         return name.map { folder.appending(path: $0) }
     }
 
+    func serverAddressChanged() {
+        guard let library else { return }
+        session = library.session
+        Task { await original.moveToActiveAddress(session: library.session) }
+    }
+
     // MARK: Start-up
 
     /// Recreates the background session at launch, so a file finished while the app was gone lands.

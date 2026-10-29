@@ -73,6 +73,7 @@ final class AppModel {
         library = nil
         Task { await RemotePlaybackActivity.shared.endAll() }
         SessionStorage.delete()
+        ActiveServerAddress.set(nil)
         LibraryCache.delete()
         Task { await session.client.signOut() }
     }

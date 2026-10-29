@@ -91,6 +91,8 @@ final class SignInModel {
                 userID: user.userID, userName: user.userName, accessToken: user.accessToken
             )
             SessionStorage.save(session)
+            let known = ServerAddressBook.addresses(serverID: server.id, signedInAt: serverURL)
+            ServerAddressBook.save(known, serverID: server.id)
             onSignedIn(session)
         } catch is CancellationError {
             phase = .enterAddress

@@ -37,16 +37,59 @@ nonisolated final class OriginalDownloader: NSObject, URLSessionDownloadDelegate
         let folder = DownloadStore.folder(itemID: itemID)
         let resumeURL = folder.appending(path: Self.resumeDataName)
         let task: URLSessionDownloadTask
-        if let resumeData = try? Data(contentsOf: resumeURL) {
-            try? FileManager.default.removeItem(at: resumeURL)
+        let downloadURL = Self.downloadURL(itemID: itemID, server: session.client.serverURL)
+        let resumeData = (try? Data(contentsOf: resumeURL)).flatMap { Self.retargeted($0, to: downloadURL) }
+        try? FileManager.default.removeItem(at: resumeURL)
+        if let resumeData {
             task = backgroundSession().downloadTask(withResumeData: resumeData)
         } else {
-            var request = URLRequest(url: session.serverURL.appending(path: "Items/\(itemID)/Download"))
+            var request = URLRequest(url: downloadURL)
             request.setValue(session.client.authorizationHeader, forHTTPHeaderField: "Authorization")
             task = backgroundSession().downloadTask(with: request)
         }
         task.taskDescription = itemID
         task.resume()
+    }
+
+    /// Moves running downloads to the address the server is used on now, keeping what they have.
+    @MainActor func moveToActiveAddress(session: Session) async {
+        let server = session.client.serverURL
+        for task in await backgroundSession().allTasks {
+            guard let download = task as? URLSessionDownloadTask, let itemID = task.taskDescription,
+                  task.state == .running || task.state == .suspended,
+                  task.currentRequest?.url?.host() != server.host() || task.currentRequest?.url?.port != server.port
+            else { continue }
+            if let data = await download.cancelByProducingResumeData(),
+               let folder = try? DownloadStore.prepareFolder(itemID: itemID) {
+                try? data.write(to: folder.appending(path: Self.resumeDataName))
+            }
+            start(itemID: itemID, session: session)
+        }
+    }
+
+    private static func downloadURL(itemID: String, server: URL) -> URL {
+        server.appending(path: "Items/\(itemID)/Download")
+    }
+
+    /// Resume data holds the address the download began on; a download goes on elsewhere only when
+    /// that address in it is replaced. Nil when the data has an unknown shape.
+    private static func retargeted(_ resumeData: Data, to url: URL) -> Data? {
+        var format = PropertyListSerialization.PropertyListFormat.binary
+        guard var plist = try? PropertyListSerialization.propertyList(
+            from: resumeData, options: [], format: &format
+        ) as? [String: Any] else { return nil }
+        plist["NSURLSessionDownloadURL"] = url.absoluteString
+        for key in ["NSURLSessionResumeOriginalRequest", "NSURLSessionResumeCurrentRequest"] {
+            guard let archived = plist[key] as? Data else { continue }
+            guard let request = try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSURLRequest.self, from: archived),
+                  let moved = request.mutableCopy() as? NSMutableURLRequest
+            else { return nil }
+            moved.url = url
+            guard let rearchived = try? NSKeyedArchiver.archivedData(withRootObject: moved, requiringSecureCoding: false)
+            else { return nil }
+            plist[key] = rearchived
+        }
+        return try? PropertyListSerialization.data(fromPropertyList: plist, format: format, options: 0)
     }
 
     /// Stops the download and keeps what it has, so `start` goes on from there.
@@ -127,7 +170,11 @@ nonisolated final class OriginalDownloader: NSObject, URLSessionDownloadDelegate
         guard let error, let itemID = task.taskDescription else { return }
         if (error as? URLError)?.code == .cancelled { return }
         Self.logger.error("Original failed: \(error.localizedDescription, privacy: .public)")
-        if let resumeData = (error as NSError).userInfo[NSURLSessionDownloadTaskResumeData] as? Data {
+        if var resumeData = (error as NSError).userInfo[NSURLSessionDownloadTaskResumeData] as? Data {
+            if let server = ActiveServerAddress.url,
+               let moved = Self.retargeted(resumeData, to: Self.downloadURL(itemID: itemID, server: server)) {
+                resumeData = moved
+            }
             let resumed = session.downloadTask(withResumeData: resumeData)
             resumed.taskDescription = itemID
             resumed.resume()

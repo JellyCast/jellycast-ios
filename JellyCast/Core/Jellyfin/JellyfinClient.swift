@@ -33,9 +33,22 @@ struct QuickConnectRequest: Sendable {
 
 /// Talks to one Jellyfin server; holds no state besides the address and the sign-in.
 nonisolated struct JellyfinClient: Sendable {
-    let serverURL: URL
     let deviceID: String
     var accessToken: String?
+    private let fixedURL: URL
+    /// Clients of the signed-in session follow a switch of address, also the ones screens keep.
+    private let followsActiveAddress: Bool
+
+    var serverURL: URL {
+        followsActiveAddress ? ActiveServerAddress.url ?? fixedURL : fixedURL
+    }
+
+    init(serverURL: URL, deviceID: String, accessToken: String? = nil, followsActiveAddress: Bool = false) {
+        fixedURL = serverURL
+        self.deviceID = deviceID
+        self.accessToken = accessToken
+        self.followsActiveAddress = followsActiveAddress
+    }
 
     private static let clientName = "JellyCast"
     private static let requestTimeoutSeconds = 15.0

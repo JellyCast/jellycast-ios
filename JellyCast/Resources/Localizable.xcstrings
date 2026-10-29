@@ -1,6 +1,106 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "Addresses": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adressen"
+          }
+        }
+      }
+    },
+    "In use": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In gebruik"
+          }
+        }
+      }
+    },
+    "Add address": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adres toevoegen"
+          }
+        }
+      }
+    },
+    "Add": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toevoegen"
+          }
+        }
+      }
+    },
+    "JellyCast uses the first address from the top that answers. Tap Edit to change the order.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "JellyCast gebruikt het eerste adres van boven dat antwoordt. Tik op Wijzig om de volgorde te veranderen."
+          }
+        }
+      }
+    },
+    "Add another address of %@, for example over your VPN. You stay signed in.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voeg nog een adres van %@ toe, bijvoorbeeld via je VPN. Je blijft ingelogd."
+          }
+        }
+      }
+    },
+    "For example 10.8.0.1:8096": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bijvoorbeeld 10.8.0.1:8096"
+          }
+        }
+      }
+    },
+    "The server doesn't answer on this address right now.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De server antwoordt nu niet op dit adres."
+          }
+        }
+      }
+    },
+    "This address is already in the list.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dit adres staat al in de lijst."
+          }
+        }
+      }
+    },
+    "This address leads to another server: %@.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dit adres hoort bij een andere server: %@."
+          }
+        }
+      }
+    },
     "Next episodes are on this device": {
       "localizations": {
         "nl": {

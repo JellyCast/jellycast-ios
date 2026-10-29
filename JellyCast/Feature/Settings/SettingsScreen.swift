@@ -12,7 +12,11 @@ struct SettingsScreen: View {
             Form {
                 Section("Server") {
                     LabeledContent("Server", value: store.session.serverName)
-                    LabeledContent("Address", value: store.session.serverURL.absoluteString)
+                    NavigationLink {
+                        ServerAddressesScreen(store: store)
+                    } label: {
+                        LabeledContent("Address", value: ServerAddressesScreen.title(of: store.session.serverURL))
+                    }
                     LabeledContent("Signed in as", value: store.session.userName)
                 }
                 Section("Library") {
