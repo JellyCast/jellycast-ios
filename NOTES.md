@@ -35,6 +35,15 @@ The user checks battery use over a full film, PiP and AirPlay on the iPhone.
 
 ## Decisions
 
+### Every device pairs the Chromecast with a certificate of its own (2026-10-29)
+
+- **Found by the user:** after pairing the iPad with the Chromecast, the iPhone could no longer play on it ("The TV didn't get that", sometimes nothing at all). Every device made its remote-protocol certificate with the same name ("JellyCast") and the same serial number (0x1000), so to the Chromecast they looked like one client and it kept only the device that paired last. Not proven on the TV itself (its pairing store can't be read), but it is the only thing the two devices share, and it matches "the last one to pair wins".
+- New certificates get a name of their own ("JellyCast" and 8 random hex characters) and a random 16-byte serial number (`ClientIdentity`). A device that still has the shared certificate replaces it the next time it pairs (`renewIfShared`, at the start of `AndroidTVPairing`); its old pairings end with it.
+- "Play on" a paired TV whose JellyCast is open no longer depends on the remote protocol alone: when waking fails, the server starts it there (the old route before pairing). When the TV refuses the certificate in the TLS handshake, the pairing is kept but marked `needsPairing`: the TV stays in "Play on…" as "Pair again to turn it on from this iPhone" (also while its JellyCast is closed, since the address is known), and a tap pairs it again. Long-pressing any paired TV offers Pair again and Forget pairing. Pairing only needs the TV's address and the TV on, not JellyCast open, so the pairing sheet no longer asks for that.
+- Found by the user with the first version of this fix: the iPhone could play on the open TV app (the server fallback) but no longer saw the sleeping Chromecast, and there was nothing to unpair. That version forgot a refused pairing, which proves the TV refused the iPhone's old certificate in the handshake.
+- What to do on a device: on the iPhone, open "Play on…" and pair the Chromecast again (with JellyCast open on the TV, "Pair Chromecast"). The iPad keeps working with its current pairing.
+- Checked: the new certificate parses and verifies (openssl, built from the same DER code on the Mac); the app builds. Not checked yet: pairing the iPhone again and both devices waking the Chromecast. Installed on the iPhone 18 Pro Max and the iPad, built from the last commit plus this change only (another session's work in this checkout was left out). The Android app had the same certificate and gets the same fix.
+
 ### TV and download pill in the iPad's top bar (2026-10-29)
 
 - **Asked by the user:** the full-width TV bar along the bottom fits a phone but not an iPad, least of all in landscape, where the tab bar sits at the top. Compared options (corner card, top-bar pill, side panel, narrow capsule); a corner card was dropped because the mini player can show at the same time.

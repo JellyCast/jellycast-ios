@@ -7,8 +7,20 @@ nonisolated struct PairedTV: Codable, Sendable, Identifiable, Equatable {
     let deviceID: String
     var host: String
     var name: String
+    /// The TV no longer accepts this device's certificate: pair again before it can be woken.
+    var needsPairing = false
 
     var id: String { deviceID }
+}
+
+nonisolated extension PairedTV {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        deviceID = try container.decode(String.self, forKey: .deviceID)
+        host = try container.decode(String.self, forKey: .host)
+        name = try container.decode(String.self, forKey: .name)
+        needsPairing = try container.decodeIfPresent(Bool.self, forKey: .needsPairing) ?? false
+    }
 }
 
 @Observable
@@ -29,6 +41,16 @@ final class PairedTVs {
     func add(_ tv: PairedTV) {
         all.removeAll { $0.deviceID == tv.deviceID }
         all.append(tv)
+        save()
+    }
+
+    func tv(_ deviceID: String) -> PairedTV? {
+        all.first { $0.deviceID == deviceID }
+    }
+
+    func markNeedsPairing(_ deviceID: String) {
+        guard let index = all.firstIndex(where: { $0.deviceID == deviceID }) else { return }
+        all[index].needsPairing = true
         save()
     }
 

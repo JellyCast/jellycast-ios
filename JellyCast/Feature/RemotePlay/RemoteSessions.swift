@@ -1,4 +1,5 @@
 import Foundation
+import Network
 
 /// What plays on the user's other devices, kept current while the app is in the foreground.
 @Observable
@@ -143,13 +144,26 @@ final class RemoteSessions {
     }
 
     var wakeableTVs: [PairedTV] {
-        sleepingTVs.filter { reachableTVs.contains($0.deviceID) }
+        sleepingTVs.filter { !$0.needsPairing && reachableTVs.contains($0.deviceID) }
     }
 
-    /// TVs to offer with JellyCast open. A paired one always goes through the remote route,
-    /// which needs a direct connection, so it only shows once the probe reached it.
+    /// Paired TVs that refused this device and whose JellyCast isn't open.
+    var tvsToPairAgain: [PairedTV] {
+        sleepingTVs.filter(\.needsPairing)
+    }
+
+    /// TVs to offer with JellyCast open. A paired one goes through the remote route, which needs
+    /// a direct connection, so it only shows once the probe reached it.
     var playableDevices: [RemoteDevice] {
-        devices.filter { !paired.contains($0.deviceID) || reachableTVs.contains($0.deviceID) }
+        devices.filter { device in
+            guard let tv = paired.tv(device.deviceID), !tv.needsPairing else { return true }
+            return reachableTVs.contains(device.deviceID)
+        }
+    }
+
+    /// The paired TV to wake for this device, unless it has to pair again.
+    func wakeableTV(_ deviceID: String) -> PairedTV? {
+        paired.tv(deviceID).flatMap { $0.needsPairing ? nil : $0 }
     }
 
     /// After the probe: a paired TV that can't be reached from this network.
@@ -168,9 +182,9 @@ final class RemoteSessions {
             }
     }
 
-    /// Android TVs with JellyCast open that aren't paired yet.
+    /// Android TVs with JellyCast open that aren't paired, or have to pair again.
     var pairableTVs: [RemoteDevice] {
-        devices.filter { $0.isAndroidTV && $0.address != nil && !paired.contains($0.deviceID) }
+        devices.filter { $0.isAndroidTV && $0.address != nil && wakeableTV($0.deviceID) == nil }
     }
 
     /// After "Continue on iPhone": stop the TV, and turn a paired Chromecast off when it can be
@@ -181,7 +195,12 @@ final class RemoteSessions {
         try? await AndroidTVRemote.turnOff(host: tv.host)
     }
 
-    func wakeAndPlay(_ tv: PairedTV, itemID: String, startTicks: Int64, streams: StreamSelection? = nil) async {
+    /// With `fallbackSessionID`, the TV app is open: when the remote protocol fails, the server
+    /// starts it there instead. A TV that refuses this device's certificate is marked to pair again.
+    func wakeAndPlay(
+        _ tv: PairedTV, itemID: String, startTicks: Int64, streams: StreamSelection? = nil,
+        fallbackSessionID: String? = nil
+    ) async {
         var link = "jellycast://play?item=\(itemID)&start=\(startTicks / (Ticks.perSecond / 1000))"
         if let audio = streams?.audio { link += "&audio=\(audio)" }
         if let subtitle = streams?.subtitle { link += "&subtitle=\(subtitle)" }
@@ -192,7 +211,13 @@ final class RemoteSessions {
         } catch is CancellationError {
             return
         } catch {
-            commandFailed = true
+            if case .tls = error as? NWError { paired.markNeedsPairing(tv.deviceID) }
+            if let fallbackSessionID {
+                let command = RemoteCommand.play(itemID: itemID, startTicks: startTicks, streams: streams)
+                await send(command, to: fallbackSessionID)
+            } else {
+                commandFailed = true
+            }
         }
     }
 

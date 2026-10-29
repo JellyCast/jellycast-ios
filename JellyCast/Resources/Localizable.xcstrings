@@ -1837,6 +1837,36 @@
         }
       }
     },
+    "Pair again": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opnieuw koppelen"
+          }
+        }
+      }
+    },
+    "Pair again to turn it on from this iPhone": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koppel opnieuw om hem vanaf deze iPhone aan te zetten"
+          }
+        }
+      }
+    },
+    "The TV didn't answer. Is it on, and on this network?": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De tv antwoordde niet. Staat hij aan en zit hij op dit netwerk?"
+          }
+        }
+      }
+    },
     "Once. After that your iPhone turns the TV on and starts JellyCast, even when everything is in standby.": {
       "localizations": {
         "nl": {
@@ -1873,16 +1903,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Koppelen"
-          }
-        }
-      }
-    },
-    "The TV didn't answer. Is JellyCast open on it?": {
-      "localizations": {
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "De tv antwoordt niet. Staat JellyCast erop open?"
           }
         }
       }

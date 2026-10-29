@@ -25,6 +25,7 @@ nonisolated final class AndroidTVPairing: @unchecked Sendable {
     }
 
     init(host: String) throws {
+        try ClientIdentity.renewIfShared()
         let client = try ClientIdentity.load()
         clientCertificate = client.certificate
         channel = TLSChannel(host: host, port: Self.port, identity: client.identity)

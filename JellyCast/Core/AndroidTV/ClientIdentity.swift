@@ -6,7 +6,10 @@ import Security
 nonisolated enum ClientIdentity {
     private static let keyTag = Data("nl.jellycast.ios.androidtv.key".utf8)
     private static let certificateLabel = "nl.jellycast.ios.androidtv.certificate"
-    private static let commonName = "JellyCast"
+    /// Every device used to get this name and the same serial number, and the Chromecast then
+    /// kept only the device that paired last.
+    private static let sharedCommonName = "JellyCast"
+    private static let serialNumberBytes = 16
     private static let validityYears = 10
 
     enum Failure: Error { case keyGeneration, signing, certificate, keychain(OSStatus) }
@@ -16,6 +19,15 @@ nonisolated enum ClientIdentity {
         try create()
         guard let created = stored() else { throw Failure.keychain(errSecItemNotFound) }
         return created
+    }
+
+    /// Replaces a certificate that other devices share before this device pairs again; its old
+    /// pairings end with it.
+    static func renewIfShared() throws {
+        guard let existing = stored(),
+              SecCertificateCopySubjectSummary(existing.certificate) as String? == sharedCommonName
+        else { return }
+        try create()
     }
 
     /// Modulus and exponent as unsigned big-endian bytes, as the pairing secret hashes them.
@@ -58,8 +70,11 @@ nonisolated enum ClientIdentity {
               let publicKey = SecKeyCopyPublicKey(privateKey),
               let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, nil) as Data?
         else { throw Failure.keyGeneration }
+        var serialNumber = randomBytes(serialNumberBytes)
+        serialNumber[0] = serialNumber[0] & 0x7F | 0x40
         let tbs = DER.tbsCertificate(
-            commonName: commonName, publicKey: Array(publicKeyData), validFrom: .now,
+            commonName: "\(sharedCommonName) \(randomBytes(4).map { String(format: "%02X", $0) }.joined())",
+            serialNumber: serialNumber, publicKey: Array(publicKeyData), validFrom: .now,
             validUntil: Calendar(identifier: .gregorian).date(byAdding: .year, value: validityYears, to: .now) ?? .now
         )
         guard let signature = SecKeyCreateSignature(
@@ -75,6 +90,10 @@ nonisolated enum ClientIdentity {
         ] as CFDictionary, nil)
         guard status == errSecSuccess || status == errSecDuplicateItem else { throw Failure.keychain(status) }
     }
+
+    private static func randomBytes(_ count: Int) -> [UInt8] {
+        (0..<count).map { _ in UInt8.random(in: .min ... .max) }
+    }
 }
 
 /// Just enough DER to build a self-signed X.509 certificate and read an RSA public key.
@@ -84,12 +103,14 @@ nonisolated enum DER {
     private static let commonNameOID: [UInt8] = [0x06, 0x03, 0x55, 0x04, 0x03]
     private static let null: [UInt8] = [0x05, 0x00]
 
-    static func tbsCertificate(commonName: String, publicKey: [UInt8], validFrom: Date, validUntil: Date) -> [UInt8] {
+    static func tbsCertificate(
+        commonName: String, serialNumber: [UInt8], publicKey: [UInt8], validFrom: Date, validUntil: Date
+    ) -> [UInt8] {
         let name = sequence(set(sequence(commonNameOID + element(0x0C, Array(commonName.utf8)))))
         let algorithm = sequence(sha256WithRSA + null)
         let publicKeyInfo = sequence(sequence(rsaEncryption + null) + element(0x03, [0x00] + publicKey))
         return sequence(
-            element(0xA0, integer([2])) + integer([0x10, 0x00]) + algorithm + name
+            element(0xA0, integer([2])) + integer(serialNumber) + algorithm + name
                 + sequence(utcTime(validFrom) + utcTime(validUntil)) + name + publicKeyInfo
         )
     }

@@ -38,7 +38,7 @@ struct PlayOnSheet: View {
     @Environment(\.dismiss) private var dismiss
     @State private var renaming: (deviceID: String, name: String)?
     @State private var newName = ""
-    @State private var pairingDevice: RemoteDevice?
+    @State private var pairingTarget: PairingTarget?
 
     var body: some View {
         ScrollView {
@@ -66,6 +66,15 @@ struct PlayOnSheet: View {
                     }
                     .contextMenu { menu(deviceID: tv.deviceID, name: tv.name) }
                 }
+                ForEach(tvsToPairAgain) { tv in
+                    row(
+                        title: tv.name, detail: String(localized: "Pair again to turn it on from this iPhone"),
+                        systemImage: "tv", isAccented: false
+                    ) {
+                        pairingTarget = PairingTarget(tv)
+                    }
+                    .contextMenu { menu(deviceID: tv.deviceID, name: tv.name) }
+                }
                 if let onPlayHere {
                     row(title: String(localized: "This iPhone"), detail: nil, systemImage: "iphone", isAccented: false) {
                         dismiss()
@@ -78,7 +87,7 @@ struct PlayOnSheet: View {
                         .foregroundStyle(JellyCastColors.textMuted)
                         .padding(.horizontal, 4)
                 }
-                if devices.isEmpty && wakeableTVs.isEmpty {
+                if devices.isEmpty && wakeableTVs.isEmpty && tvsToPairAgain.isEmpty {
                     Text("No TV can be reached now. Open JellyCast on a TV to play there.")
                         .font(.subheadline)
                         .foregroundStyle(JellyCastColors.text)
@@ -88,8 +97,8 @@ struct PlayOnSheet: View {
                     .font(.footnote)
                     .foregroundStyle(JellyCastColors.textMuted)
                     .padding(.horizontal, 4)
-                if let pairable = remote.pairableTVs.first {
-                    Button("Pair Chromecast") { pairingDevice = pairable }
+                if let pairable = remote.pairableTVs.first.flatMap(PairingTarget.init) {
+                    Button("Pair Chromecast") { pairingTarget = pairable }
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(JellyCastColors.accent)
                         .padding(.horizontal, 4)
@@ -101,8 +110,8 @@ struct PlayOnSheet: View {
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
         .task { await remote.checkReachability() }
-        .sheet(item: $pairingDevice) { device in
-            PairTVSheet(device: device) { remote.paired.add($0) }
+        .sheet(item: $pairingTarget) { target in
+            PairTVSheet(target: target) { remote.paired.add($0) }
                 .presentationDetents([.medium, .large])
         }
         .alert("Rename", isPresented: Binding(get: { renaming != nil }, set: { if !$0 { renaming = nil } })) {
@@ -124,6 +133,10 @@ struct PlayOnSheet: View {
         remote.wakeableTVs.filter { $0.deviceID != excludedDeviceID }
     }
 
+    private var tvsToPairAgain: [PairedTV] {
+        remote.tvsToPairAgain.filter { $0.deviceID != excludedDeviceID }
+    }
+
     private var startTicks: Int64 {
         handOffTicks ?? (playable.watch.played ? 0 : playable.watch.positionTicks)
     }
@@ -143,25 +156,29 @@ struct PlayOnSheet: View {
             newName = name
             renaming = (deviceID, name)
         }
-        if remote.paired.contains(deviceID) {
+        if let tv = remote.paired.tv(deviceID) {
+            Button("Pair again", systemImage: "link") { pairingTarget = PairingTarget(tv) }
             Button("Forget pairing", systemImage: "link.badge.minus", role: .destructive) {
                 remote.paired.forget(deviceID)
             }
         }
     }
 
-    private func wake(_ tv: PairedTV) {
+    private func wake(_ tv: PairedTV, fallbackSessionID: String? = nil) {
         dismiss()
         onHandOff()
         Task {
-            await remote.wakeAndPlay(tv, itemID: playable.id, startTicks: startTicks, streams: handOffStreams)
+            await remote.wakeAndPlay(
+                tv, itemID: playable.id, startTicks: startTicks, streams: handOffStreams,
+                fallbackSessionID: fallbackSessionID
+            )
         }
     }
 
     private func play(on device: RemoteDevice) {
         // Only the remote protocol can turn the TV on, which may be off while JellyCast is open.
-        if let tv = remote.paired.all.first(where: { $0.deviceID == device.deviceID }) {
-            return wake(tv)
+        if let tv = remote.wakeableTV(device.deviceID) {
+            return wake(tv, fallbackSessionID: device.id)
         }
         dismiss()
         onHandOff()
