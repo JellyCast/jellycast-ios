@@ -83,6 +83,7 @@ In full screen (iPhone landscape, iPad video only) a swipe down returns to the r
 - Tap does what the old cards did: a Continue watching tile plays (as the Up next cards did; the hero's backdrop opened the page, its frame played), a New or Not started tile opens the series page or movie detail.
 - iPhone: no navigation bar on Home; the grid starts under the status bar and the profile button sits on the first tile. iPad: the top tab bar and the profile button in the toolbar stay. iPad landscape: 3 columns, the first tile spans 2 columns and 2 rows, its image cropped so its bottom lines up with the two tiles beside it.
 - Title and meta are one line each, so every tile in a row has the same height.
+- iPad landscape (2026-10-29, asked by the user): the first tile's image frame now reaches down to the bottom of the lower tile beside it, so the images line up at the top and the bottom; the 16:9 image sits in it with thin black bars above and below instead of being cropped. Its title starts at the same height as the lower tile's; its meta ends a little lower (larger font).
 - The "All" link of New to the library sorted by newest went with the row.
 - Found on the iPhone 18 Pro Max: measuring the top safe area from a background view of Home fed back into Home's own height and SwiftUI never settled (watchdog kill at launch, 0x8BADF00D). Not on the iPhone 17 simulator or the iPad. `RefreshableScrollView(padsSafeAreaTop:)` now pads the content by the inset it measures itself.
 - No unit test target exists yet, so `homeFeed` has no test.

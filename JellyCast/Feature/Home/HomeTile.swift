@@ -86,8 +86,9 @@ private struct HomeTileImage: View {
     var body: some View {
         let inset = style.isPhone ? Self.badgeInsetPhone : Self.badgeInset
         RemoteImage(ref: item.image, type: item.imageType, width: size.width)
-            .frame(width: size.width, height: size.imageHeight)
-            .frame(maxHeight: size.imageHeight == nil ? .infinity : nil)
+            .frame(width: size.width, height: size.isLetterboxed ? size.width * 9 / 16 : size.imageHeight)
+            .frame(height: size.imageHeight)
+            .background(.black)
             .overlay(alignment: .topLeading) {
                 if let label = item.label {
                     TileLabel(label: label, isPhone: style.isPhone).padding(inset)

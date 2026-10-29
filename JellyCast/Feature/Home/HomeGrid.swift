@@ -37,17 +37,27 @@ struct HomeGridMetrics {
         tilesBesideFeatured > 0 ? 2 * columnWidth + columnGap : contentWidth
     }
 
-    /// Beside two stacked tiles the image has no height of its own: `FeaturedRowLayout` gives
-    /// the tile the height that lines its meta line up with the lower stacked tile's.
-    var featuredImageHeight: CGFloat? {
-        tilesBesideFeatured > 0 ? nil : (featuredWidth * Self.imageHeightPerWidth).rounded()
+    /// Beside two stacked tiles the image frame reaches down to the lower tile's image, so both
+    /// bottoms line up; the 16:9 image sits in it with black bars above and below.
+    var featuredImageHeight: CGFloat {
+        guard tilesBesideFeatured > 0 else {
+            return (featuredWidth * Self.imageHeightPerWidth).rounded()
+        }
+        let style = smallStyle
+        let smallText = style.imageToTitle + style.titleLineHeight
+            + style.titleToMeta + style.metaLineHeight
+        return 2 * smallImageHeight + smallText + rowGap
     }
+
+    var isFeaturedLetterboxed: Bool { tilesBesideFeatured > 0 }
 }
 
-/// The width of a tile and the height of its image; `nil` fills the height the grid proposes.
+/// The width of a tile and the height of its image frame. A letterboxed image keeps 16:9 and
+/// fills the rest of the frame with black.
 struct HomeTileSize {
     let width: CGFloat
-    let imageHeight: CGFloat?
+    let imageHeight: CGFloat
+    var isLetterboxed = false
 }
 
 /// The featured tile first, then rows of equal tiles; lazy, so a long list stays smooth.
@@ -63,7 +73,7 @@ struct HomeGrid<Item: Identifiable, Tile: View, Overlay: View>: View {
                 if besideFeatured.isEmpty {
                     featuredTile(featured)
                 } else {
-                    FeaturedRowLayout(spacing: metrics.columnGap) {
+                    HStack(alignment: .top, spacing: metrics.columnGap) {
                         featuredTile(featured)
                         VStack(alignment: .leading, spacing: metrics.rowGap) {
                             ForEach(besideFeatured) { smallTile($0) }
@@ -82,7 +92,11 @@ struct HomeGrid<Item: Identifiable, Tile: View, Overlay: View>: View {
 
     private func featuredTile(_ item: Item) -> some View {
         tile(
-            item, HomeTileSize(width: metrics.featuredWidth, imageHeight: metrics.featuredImageHeight),
+            item,
+            HomeTileSize(
+                width: metrics.featuredWidth, imageHeight: metrics.featuredImageHeight,
+                isLetterboxed: metrics.isFeaturedLetterboxed
+            ),
             metrics.featuredStyle
         )
         .overlay(alignment: .topTrailing) { featuredOverlay() }
@@ -110,46 +124,5 @@ struct HomeGrid<Item: Identifiable, Tile: View, Overlay: View>: View {
         let items: [Item]
 
         var id: Item.ID? { items.first?.id }
-    }
-}
-
-/// The featured tile beside the stacked column, as tall as it takes for both last text lines
-/// to share a baseline: the featured meta uses a larger font, so equal bottoms would not.
-private struct FeaturedRowLayout: Layout {
-    let spacing: CGFloat
-
-    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-        let sizes = measure(subviews)
-        return CGSize(
-            width: sizes.featured.width + spacing + sizes.stacked.width,
-            height: max(sizes.featured.height, sizes.stacked.height)
-        )
-    }
-
-    func placeSubviews(
-        in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()
-    ) {
-        guard subviews.count == 2 else { return }
-        let sizes = measure(subviews)
-        subviews[0].place(at: bounds.origin, proposal: ProposedViewSize(sizes.featured))
-        subviews[1].place(
-            at: CGPoint(x: bounds.minX + sizes.featured.width + spacing, y: bounds.minY),
-            proposal: ProposedViewSize(sizes.stacked)
-        )
-    }
-
-    private func measure(_ subviews: Subviews) -> (featured: CGSize, stacked: CGSize) {
-        guard subviews.count == 2 else { return (.zero, .zero) }
-        let stacked = subviews[1].dimensions(in: .unspecified)
-        let featuredAtStackedHeight = subviews[0].dimensions(
-            in: ProposedViewSize(width: nil, height: stacked.height)
-        )
-        let featuredBelowBaseline = featuredAtStackedHeight.height
-            - featuredAtStackedHeight[VerticalAlignment.lastTextBaseline]
-        let featuredHeight = stacked[VerticalAlignment.lastTextBaseline] + featuredBelowBaseline
-        return (
-            CGSize(width: featuredAtStackedHeight.width, height: featuredHeight),
-            CGSize(width: stacked.width, height: stacked.height)
-        )
     }
 }
