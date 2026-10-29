@@ -19,7 +19,7 @@ struct UsageConsentScreen: View {
                     Text("Statistics")
                         .font(.title.bold())
                         .foregroundStyle(JellyCastColors.text)
-                    Text("We count how many devices use JellyCast, per country. Without your name or what you watch.")
+                    Text("We count how many devices use JellyCast, per country, to keep it free. Without your name or what you watch.")
                         .foregroundStyle(JellyCastColors.text)
                     moreInformation
                 }

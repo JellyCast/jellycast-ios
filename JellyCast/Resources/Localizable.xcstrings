@@ -4077,16 +4077,6 @@
         }
       }
     },
-    "We count how many devices use JellyCast, per country. Without your name or what you watch.": {
-      "localizations": {
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "We tellen hoeveel toestellen JellyCast gebruiken, per land. Zonder je naam of wat je kijkt."
-          }
-        }
-      }
-    },
     "More information": {
       "localizations": {
         "nl": {
@@ -4123,6 +4113,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "De gegevens worden na 13 maanden verwijderd."
+          }
+        }
+      }
+    },
+    "We count how many devices use JellyCast, per country, to keep it free. Without your name or what you watch.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We tellen hoeveel toestellen JellyCast gebruiken, per land, om de app gratis te houden. Zonder je naam of wat je kijkt."
           }
         }
       }
