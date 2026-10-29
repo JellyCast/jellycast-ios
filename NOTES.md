@@ -35,6 +35,14 @@ The user checks battery use over a full film, PiP and AirPlay on the iPhone.
 
 ## Decisions
 
+### TV and download pill in the iPad's top bar (2026-10-29)
+
+- **Asked by the user:** the full-width TV bar along the bottom fits a phone but not an iPad, least of all in landscape, where the tab bar sits at the top. Compared options (corner card, top-bar pill, side panel, narrow capsule); a corner card was dropped because the mini player can show at the same time.
+- On the iPad (`layout.isRegular`) the bottom accessory is off; what plays on a TV, else the running download, is a toolbar item at the top right, left of each screen's own items (`topBarPill()` in `TopBarPill.swift`, added in `routes` to every tab root and pushed screen). TV: still, title and a progress line; paused: a pause sign over the still. Download: the state icon and title. Below 1000 pt wide (portrait) only the still in a progress ring, or the download icon. A tap opens the now playing screen or Downloads. The iPhone keeps the bar.
+- Library hid its navigation bar everywhere; on the iPad it now shows, or the pill had no place there.
+- The mini player no longer moves up for the TV bar on the iPad.
+- Checked in the iPad Pro simulator against the real Chromecast session: Home landscape (title pill) and portrait (ring), Library, a series page, a tap opening now playing. Not checked: the download pill, the paused state, closing now playing still slides down instead of towards the pill. Installed on the iPad and the iPhone 18 Pro Max (the iPhone 14 was unreachable).
+
 ### Playing on in the background (2026-10-28)
 
 - Leaving the app while a video plays keeps it playing: in a PiP window when the video was on screen (full or mini player), as sound otherwise; locking the screen keeps the sound going. Back in the app the video goes on where the sound is.

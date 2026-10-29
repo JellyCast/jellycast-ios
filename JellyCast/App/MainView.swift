@@ -24,8 +24,6 @@ struct MainView: View {
     /// The iPad draws the tab bar at the top, so only the margin is left at the bottom.
     private static let miniPlayerBottomInsetRegular: CGFloat = 16
     private static let tvBarHeight: CGFloat = 56
-    /// On the iPad the TV bar floats higher above the bottom edge than above the iPhone's tab bar.
-    private static let tvBarHeightRegular: CGFloat = 88
     private static let miniPlayerMargin: CGFloat = 16
     private static let miniPlayerWidthsRegular: (small: CGFloat, large: CGFloat) = (320, 480)
 
@@ -56,7 +54,7 @@ struct MainView: View {
                 }
             }
         }
-        .bottomBar(remote.current, download: navigation.tab == .downloads ? nil : DownloadStore.shared.current) {
+        .bottomBar(bottomBarSession, download: bottomBarDownload) {
             remote.show($0)
         } onOpenDownloads: {
             navigation.tab = .downloads
@@ -277,13 +275,22 @@ private extension MainView {
         layout.isRegular ? Self.miniPlayerBottomInsetRegular : Self.miniPlayerBottomInset
     }
 
+    /// The iPad shows the TV and the download in the top bar instead (`topBarPill`).
+    var bottomBarSession: RemoteSession? {
+        layout.isRegular ? nil : remote.current
+    }
+
+    var bottomBarDownload: Download? {
+        layout.isRegular || navigation.tab == .downloads ? nil : DownloadStore.shared.current
+    }
+
     var tvBarInset: CGFloat {
-        layout.isRegular ? Self.tvBarHeightRegular : Self.tvBarHeight
+        layout.isRegular ? 0 : Self.tvBarHeight
     }
 
     /// Above the tab bar and, while it shows, the TV bar.
     var bottomInset: CGFloat {
-        baseBottomInset + (remote.current == nil ? 0 : tvBarInset)
+        baseBottomInset + (bottomBarSession == nil ? 0 : tvBarInset)
     }
 
     var miniPlayerWidth: CGFloat {
@@ -351,15 +358,18 @@ private extension View {
     }
 
     func routes(store: LibraryStore) -> some View {
-        navigationDestination(for: Route.self) { route in
-            switch route {
-            case .series(let id): SeriesScreen(store: store, seriesID: id)
-            case .movie(let id): MovieScreen(store: store, movieID: id)
-            case .person(let person): PersonScreen(store: store, person: person)
-            case .downloadedSeries(let id): DownloadedSeriesScreen(store: store, seriesID: id)
-            case .lists: ListsScreen(store: store)
-            case .list(let id): ListScreen(store: store, listID: id)
+        topBarPill().navigationDestination(for: Route.self) { route in
+            Group {
+                switch route {
+                case .series(let id): SeriesScreen(store: store, seriesID: id)
+                case .movie(let id): MovieScreen(store: store, movieID: id)
+                case .person(let person): PersonScreen(store: store, person: person)
+                case .downloadedSeries(let id): DownloadedSeriesScreen(store: store, seriesID: id)
+                case .lists: ListsScreen(store: store)
+                case .list(let id): ListScreen(store: store, listID: id)
+                }
             }
+            .topBarPill()
         }
     }
 }

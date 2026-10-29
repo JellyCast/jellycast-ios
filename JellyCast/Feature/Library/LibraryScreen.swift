@@ -8,6 +8,7 @@ struct LibraryScreen: View {
 
     @State private var filters = LibraryFilters()
     @FocusState private var isSearchFocused: Bool
+    @Environment(\.layout) private var layout
 
     var body: some View {
         @Bindable var search = search
@@ -30,7 +31,8 @@ struct LibraryScreen: View {
             }
         }
         .animation(.easeOut(duration: 0.2), value: store.syncFailure)
-        .toolbar(.hidden, for: .navigationBar)
+        // The iPad's bar holds the tabs and the pill of what plays on a TV.
+        .toolbar(layout.isRegular ? .automatic : .hidden, for: .navigationBar)
         .onChange(of: search.query, initial: true) { search.updateEpisodes(index: store.index) }
         .onChange(of: store.snapshot?.syncedAt) { search.updateEpisodes(index: store.index) }
         // A search looks in everything; the status filter would hide what was already watched.
