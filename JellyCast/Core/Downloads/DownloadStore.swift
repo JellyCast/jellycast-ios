@@ -297,7 +297,7 @@ final class DownloadStore {
                     Self.logger.info("Waiting for the network: \(error.localizedDescription, privacy: .public)")
                     update(itemID) { $0.status = .waitingForNetwork }
                     backgroundTask.setSubtitle(String(localized: "Waiting for the network"))
-                    guard await Self.waitForServer(session.client) else { break }
+                    guard await waitForServer(session.client) else { break }
                     update(itemID) { $0.status = .running }
                     backgroundTask.setSubtitle(String(localized: "Downloading"))
                 } catch {
@@ -385,16 +385,21 @@ final class DownloadStore {
         return error is URLError
     }
 
-    /// Checks every few seconds until the server answers again; false when the wait is cancelled.
-    private static func waitForServer(_ client: JellyfinClient) async -> Bool {
+    /// Checks every few seconds until the server answers again, on any of its addresses, so a
+    /// download started at home goes on over the VPN; false when the wait is cancelled.
+    private func waitForServer(_ client: JellyfinClient) async -> Bool {
         while !Task.isCancelled {
-            if NetworkMonitor.shared.isOnline,
-               (try? await client.publicInfo(timeout: serverCheckTimeoutSeconds)) != nil {
+            if NetworkMonitor.shared.isOnline, await isServerAnswering(client) {
                 return true
             }
-            try? await Task.sleep(for: serverCheckInterval)
+            try? await Task.sleep(for: Self.serverCheckInterval)
         }
         return false
+    }
+
+    private func isServerAnswering(_ client: JellyfinClient) async -> Bool {
+        if let library { return await library.checkServer(reportsProblem: false) == nil }
+        return (try? await client.publicInfo(timeout: Self.serverCheckTimeoutSeconds)) != nil
     }
 
     static func title(of playable: Playable) -> String {
