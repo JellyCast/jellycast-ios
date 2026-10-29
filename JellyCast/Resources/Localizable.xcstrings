@@ -4126,6 +4126,16 @@
           }
         }
       }
+    },
+    "For support it also sends the kind of device, its system version and the app version, such as \"iPhone 17, iOS 26, JellyCast 1.0\". Not the name of your device.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voor ondersteuning stuurt hij ook het soort toestel, de systeemversie en de app-versie mee, zoals \"iPhone 17, iOS 26, JellyCast 1.0\". Niet de naam van je toestel."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -50,6 +50,10 @@ struct UsageStatisticsDetails: View {
                 When you open the app, it sends a random number made for this app, your country and \
                 the hour. Not your name, your server or what you watch.
                 """)
+            Point(systemImage: "iphone", text: """
+                For support it also sends the kind of device, its system version and the app version, \
+                such as "iPhone 17, iOS 26, JellyCast 1.0". Not the name of your device.
+                """)
             Point(systemImage: "globe.europe.africa", text: """
                 The country comes from your internet address, which is never stored.
                 """)

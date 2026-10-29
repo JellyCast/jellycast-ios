@@ -15,14 +15,26 @@ nonisolated struct JellyCastService: Sendable {
     private static let timeoutSeconds = 4.0
 
     let platform: String
+    let device: DeviceDetails
 
     @MainActor static var current: JellyCastService {
-        JellyCastService(platform: UIDevice.current.userInterfaceIdiom == .pad ? "ipados" : "ios")
+        JellyCastService(
+            platform: UIDevice.current.userInterfaceIdiom == .pad ? "ipados" : "ios",
+            device: .current
+        )
     }
 
     @concurrent
     func ping(installID: UUID) async throws {
-        let body = try JSONEncoder().encode(["id": installID.uuidString, "platform": platform])
+        let body = try JSONEncoder().encode([
+            "id": installID.uuidString,
+            "platform": platform,
+            "brand": device.brand,
+            "model": device.model,
+            "os": device.os,
+            "osVersion": device.osVersion,
+            "appVersion": device.appVersion,
+        ])
         _ = try await firstAnswer(path: "v1/ping", method: "POST", body: body)
     }
 
@@ -58,6 +70,40 @@ nonisolated struct JellyCastService: Sendable {
             }
         }
         throw lastError
+    }
+}
+
+/// The kind of device and the app version, for support. Never the device's own name, which on
+/// iOS is the owner's ("iPhone van …").
+nonisolated struct DeviceDetails: Sendable {
+    let brand = "Apple"
+    let model: String
+    let os: String
+    let osVersion: String
+    let appVersion: String
+
+    @MainActor static var current: DeviceDetails {
+        let info = Bundle.main.infoDictionary
+        let version = info?["CFBundleShortVersionString"] as? String ?? "0"
+        let build = info?["CFBundleVersion"] as? String ?? "0"
+        return DeviceDetails(
+            model: modelIdentifier,
+            os: UIDevice.current.systemName,
+            osVersion: UIDevice.current.systemVersion,
+            appVersion: "\(version) (\(build))"
+        )
+    }
+
+    /// "iPhone19,7"; the simulator reports the Mac's architecture, so it names what it simulates.
+    private static var modelIdentifier: String {
+        if let simulated = ProcessInfo.processInfo.environment["SIMULATOR_MODEL_IDENTIFIER"] {
+            return simulated
+        }
+        var system = utsname()
+        uname(&system)
+        return withUnsafeBytes(of: system.machine) { bytes in
+            String(decoding: bytes.prefix { $0 != 0 }, as: UTF8.self)
+        }
     }
 }
 

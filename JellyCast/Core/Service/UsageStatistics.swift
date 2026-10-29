@@ -11,7 +11,7 @@ final class UsageStatistics {
     }
 
     /// Raise when what is sent or why changes, so everyone is asked again.
-    static let consentVersion = 1
+    static let consentVersion = 2
 
     private(set) var choice: Choice?
 
